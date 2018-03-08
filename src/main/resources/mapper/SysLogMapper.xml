@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mlw.mapper.SysLogMapper">
+  <resultMap id="BaseResultMap" type="com.mlw.entity.SysLog">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="userName" jdbcType="VARCHAR" property="username" />
+    <result column="logTitle" jdbcType="VARCHAR" property="logtitle" />
+    <result column="clientIp" jdbcType="VARCHAR" property="clientip" />
+    <result column="requestUrl" jdbcType="VARCHAR" property="requesturl" />
+    <result column="requestMethod" jdbcType="VARCHAR" property="requestmethod" />
+    <result column="logTime" jdbcType="TIMESTAMP" property="logtime" />
+    <result column="other" jdbcType="VARCHAR" property="other" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.mlw.entity.SysLog">
+    <result column="logContent" jdbcType="LONGVARCHAR" property="logcontent" />
+    <result column="requestParams" jdbcType="LONGVARCHAR" property="requestparams" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, userName, logTitle, clientIp, requestUrl, requestMethod, logTime, other
+  </sql>
+  <sql id="Blob_Column_List">
+    logContent, requestParams
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.mlw.entity.SysLogExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from sys_log
+    <if test="parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="com.mlw.entity.SysLogExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from sys_log
+    <if test="parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from sys_log
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from sys_log
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.mlw.entity.SysLogExample">
+    delete from sys_log
+    <if test="parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.mlw.entity.SysLog">
+    insert into sys_log (id, userName, logTitle, 
+      clientIp, requestUrl, requestMethod, 
+      logTime, other, logContent, 
+      requestParams)
+    values (#{id,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, #{logtitle,jdbcType=VARCHAR}, 
+      #{clientip,jdbcType=VARCHAR}, #{requesturl,jdbcType=VARCHAR}, #{requestmethod,jdbcType=VARCHAR}, 
+      #{logtime,jdbcType=TIMESTAMP}, #{other,jdbcType=VARCHAR}, #{logcontent,jdbcType=LONGVARCHAR}, 
+      #{requestparams,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.mlw.entity.SysLog">
+    insert into sys_log
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="username != null">
+        userName,
+      </if>
+      <if test="logtitle != null">
+        logTitle,
+      </if>
+      <if test="clientip != null">
+        clientIp,
+      </if>
+      <if test="requesturl != null">
+        requestUrl,
+      </if>
+      <if test="requestmethod != null">
+        requestMethod,
+      </if>
+      <if test="logtime != null">
+        logTime,
+      </if>
+      <if test="other != null">
+        other,
+      </if>
+      <if test="logcontent != null">
+        logContent,
+      </if>
+      <if test="requestparams != null">
+        requestParams,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="logtitle != null">
+        #{logtitle,jdbcType=VARCHAR},
+      </if>
+      <if test="clientip != null">
+        #{clientip,jdbcType=VARCHAR},
+      </if>
+      <if test="requesturl != null">
+        #{requesturl,jdbcType=VARCHAR},
+      </if>
+      <if test="requestmethod != null">
+        #{requestmethod,jdbcType=VARCHAR},
+      </if>
+      <if test="logtime != null">
+        #{logtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="other != null">
+        #{other,jdbcType=VARCHAR},
+      </if>
+      <if test="logcontent != null">
+        #{logcontent,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="requestparams != null">
+        #{requestparams,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.mlw.entity.SysLogExample" resultType="java.lang.Long">
+    select count(*) from sys_log
+    <if test="parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update sys_log
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.username != null">
+        userName = #{record.username,jdbcType=VARCHAR},
+      </if>
+      <if test="record.logtitle != null">
+        logTitle = #{record.logtitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.clientip != null">
+        clientIp = #{record.clientip,jdbcType=VARCHAR},
+      </if>
+      <if test="record.requesturl != null">
+        requestUrl = #{record.requesturl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.requestmethod != null">
+        requestMethod = #{record.requestmethod,jdbcType=VARCHAR},
+      </if>
+      <if test="record.logtime != null">
+        logTime = #{record.logtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.other != null">
+        other = #{record.other,jdbcType=VARCHAR},
+      </if>
+      <if test="record.logcontent != null">
+        logContent = #{record.logcontent,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.requestparams != null">
+        requestParams = #{record.requestparams,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update sys_log
+    set id = #{record.id,jdbcType=VARCHAR},
+      userName = #{record.username,jdbcType=VARCHAR},
+      logTitle = #{record.logtitle,jdbcType=VARCHAR},
+      clientIp = #{record.clientip,jdbcType=VARCHAR},
+      requestUrl = #{record.requesturl,jdbcType=VARCHAR},
+      requestMethod = #{record.requestmethod,jdbcType=VARCHAR},
+      logTime = #{record.logtime,jdbcType=TIMESTAMP},
+      other = #{record.other,jdbcType=VARCHAR},
+      logContent = #{record.logcontent,jdbcType=LONGVARCHAR},
+      requestParams = #{record.requestparams,jdbcType=LONGVARCHAR}
+    <if test="parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update sys_log
+    set id = #{record.id,jdbcType=VARCHAR},
+      userName = #{record.username,jdbcType=VARCHAR},
+      logTitle = #{record.logtitle,jdbcType=VARCHAR},
+      clientIp = #{record.clientip,jdbcType=VARCHAR},
+      requestUrl = #{record.requesturl,jdbcType=VARCHAR},
+      requestMethod = #{record.requestmethod,jdbcType=VARCHAR},
+      logTime = #{record.logtime,jdbcType=TIMESTAMP},
+      other = #{record.other,jdbcType=VARCHAR}
+    <if test="parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mlw.entity.SysLog">
+    update sys_log
+    <set>
+      <if test="username != null">
+        userName = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="logtitle != null">
+        logTitle = #{logtitle,jdbcType=VARCHAR},
+      </if>
+      <if test="clientip != null">
+        clientIp = #{clientip,jdbcType=VARCHAR},
+      </if>
+      <if test="requesturl != null">
+        requestUrl = #{requesturl,jdbcType=VARCHAR},
+      </if>
+      <if test="requestmethod != null">
+        requestMethod = #{requestmethod,jdbcType=VARCHAR},
+      </if>
+      <if test="logtime != null">
+        logTime = #{logtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="other != null">
+        other = #{other,jdbcType=VARCHAR},
+      </if>
+      <if test="logcontent != null">
+        logContent = #{logcontent,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="requestparams != null">
+        requestParams = #{requestparams,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.mlw.entity.SysLog">
+    update sys_log
+    set userName = #{username,jdbcType=VARCHAR},
+      logTitle = #{logtitle,jdbcType=VARCHAR},
+      clientIp = #{clientip,jdbcType=VARCHAR},
+      requestUrl = #{requesturl,jdbcType=VARCHAR},
+      requestMethod = #{requestmethod,jdbcType=VARCHAR},
+      logTime = #{logtime,jdbcType=TIMESTAMP},
+      other = #{other,jdbcType=VARCHAR},
+      logContent = #{logcontent,jdbcType=LONGVARCHAR},
+      requestParams = #{requestparams,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mlw.entity.SysLog">
+    update sys_log
+    set userName = #{username,jdbcType=VARCHAR},
+      logTitle = #{logtitle,jdbcType=VARCHAR},
+      clientIp = #{clientip,jdbcType=VARCHAR},
+      requestUrl = #{requesturl,jdbcType=VARCHAR},
+      requestMethod = #{requestmethod,jdbcType=VARCHAR},
+      logTime = #{logtime,jdbcType=TIMESTAMP},
+      other = #{other,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>
