@@ -12,7 +12,7 @@
 		http://www.springframework.org/schema/aop
 		http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
 		http://www.springframework.org/schema/tx
-		http://www.springframework.org/schema/tx/spring-tx-4.0.xsd ">
+		http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
 
     <!--==============================================1、shiro的web过滤器==============================================-->
     <!--与web.xml对应的bean-->
@@ -27,7 +27,7 @@
         <!--过滤定义，从上而下，蒋匿名的anon放最下面-->
         <property name="filterChainDefinitions">
             <value>
-                <!--静态资源通过-->
+                静态资源通过
                 /login = anon
                 /static/**=anon
                 /getValidateCode = anon  <!--验证码-->
@@ -35,13 +35,12 @@
                 /images/** = anon
                 /styles/** = anon
                 /public/** = anon
-                /toLogin = anon   <!--登录页面的地址-->
+                /toLogin/** = anon   <!--登录页面的地址-->
                 /noPermission/** = anon <!--跳转没有权限的页面-->
                 <!--表示所有请求url必须通过认证-->
-                /**=  authc
+                <!--/**=  authc-->
                 <!--请求logout，shrio擦除sssion-->
                 /logout=logout
-
             </value>
         </property>
     </bean>
@@ -68,8 +67,8 @@
     <!--==============================================4 凭证匹配器===================================================-->
     <bean id="credentialsMatcher"
           class="org.apache.shiro.authc.credential.HashedCredentialsMatcher">
-        <property name="hashAlgorithmName" value="md5" />
-        <property name="hashIterations" value="1" />
+        <property name="hashAlgorithmName" value="SHA-256" />
+        <property name="hashIterations" value="16" />
     </bean>
 
     <!--==============================================5、rememberMeManager管理器========================================-->
@@ -83,5 +82,4 @@
         <!-- 记住我cookie生效时间30天 -->
         <property name="maxAge" value="2592000" />
     </bean>
-
 </beans>

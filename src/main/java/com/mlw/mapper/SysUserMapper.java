@@ -31,4 +31,6 @@ public interface SysUserMapper {
     int updateByPrimaryKey(SysUser record);
 
     Map<String,Object> getUserAll();
+
+    SysUser findSysUserByUsername(@Param("username") String username);
 }

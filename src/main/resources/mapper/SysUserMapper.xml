@@ -6,6 +6,7 @@
         <result column="userName" jdbcType="VARCHAR" property="username"/>
         <result column="password" jdbcType="VARCHAR" property="password"/>
         <result column="userState" jdbcType="INTEGER" property="userstate"/>
+        <result column="salt" jdbcType="VARCHAR" property="salt"/>
         <result column="createTime" jdbcType="TIMESTAMP" property="createtime"/>
         <result column="userDesc" jdbcType="VARCHAR" property="userdesc"/>
         <result column="userImg" jdbcType="VARCHAR" property="userimg"/>
@@ -71,7 +72,7 @@
         </where>
     </sql>
     <sql id="Base_Column_List">
-    id, userName, password, userState, createTime, userDesc, userImg
+    id, userName, password, userState, salt, createTime, userDesc, userImg
   </sql>
     <select id="selectByExample" parameterType="com.mlw.entity.SysUserExample" resultMap="BaseResultMap">
         select
@@ -247,6 +248,13 @@
         select
         <include refid="Base_Column_List"/>
         from sys_user
+    </select>
+
+    <select id="findSysUserByUsername" parameterType="string" resultType="map">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_user
+        WHERE userName = #{username}
     </select>
 
 </mapper>

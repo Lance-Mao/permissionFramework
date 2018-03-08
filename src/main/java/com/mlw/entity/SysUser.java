@@ -27,6 +27,16 @@ public class SysUser {
     /*用户头像*/
     private String userimg;
 
+    private String salt;
+
+    public String getSalt() {
+        return salt;
+    }
+
+    public void setSalt(String salt) {
+        this.salt = salt;
+    }
+
     public String getId() {
         return id;
     }
