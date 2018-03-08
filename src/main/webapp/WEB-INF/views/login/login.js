@@ -24,10 +24,10 @@ layui.use(['form','layer','jquery'],function(){
         let imgCode = $("#imgCode").val();
 
         $.ajax({
-            url: baseUrl + "login",
+            url: baseUrl + "sys/login",
             data: {username:username,password:password},
             success: function (data) {
-                if (data.result) {
+                if (data.code === 0) {
                     location.href = baseUrl + "/index";
                 }else {
                     layer.msg(data.msg);

@@ -1,20 +1,30 @@
 package com.mlw.entity;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 import java.util.Date;
 
 public class SysUser {
     private String id;
 
+    @NotBlank(message = "用户名不能为空")
     private String username;
 
+    @NotBlank(message = "密码不能为空")
     private String password;
 
+    /**
+     * 状态  0：禁用   1：正常
+     */
     private Integer userstate;
 
+    /*创建时间*/
     private Date createtime;
 
+    /*用户描述*/
     private String userdesc;
 
+    /*用户头像*/
     private String userimg;
 
     public String getId() {
