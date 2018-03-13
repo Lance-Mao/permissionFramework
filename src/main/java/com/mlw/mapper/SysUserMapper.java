@@ -32,5 +32,5 @@ public interface SysUserMapper {
 
     Map<String,Object> getUserAll();
 
-    SysUser findSysUserByUsername(@Param("username") String username);
+    List<SysUser> findSysUserByUsername(@Param("username") String username);
 }

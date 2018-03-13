@@ -244,13 +244,13 @@
     where id = #{id,jdbcType=VARCHAR}
   </update>
 
-    <select id="getUserAll" resultType="map">
+    <select id="getUserAll" resultType="com.mlw.entity.SysUser">
         select
         <include refid="Base_Column_List"/>
         from sys_user
     </select>
 
-    <select id="findSysUserByUsername" parameterType="string" resultType="map">
+    <select id="findSysUserByUsername" parameterType="string" resultType="com.mlw.entity.SysUser">
         select
         <include refid="Base_Column_List"/>
         from sys_user

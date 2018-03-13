@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.Map;
 
 @Controller
+@RequestMapping("mm")
 public class UserController {
 
     @Autowired
@@ -17,9 +18,7 @@ public class UserController {
     @RequestMapping("/test")
     @ResponseBody
     public Map<String, Object> test() {
-        System.out.println(123);
         try {
-            System.out.println("try-catch");
             System.out.println(userService.getUserAll());
             return userService.getUserAll();
         } catch (Exception e) {

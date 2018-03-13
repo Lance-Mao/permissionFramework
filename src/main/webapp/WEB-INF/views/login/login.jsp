@@ -42,7 +42,7 @@
 		</div>
 	</form>
 	<script type="text/javascript" src="${baseurl}/static/layui/layui.js"></script>
-	<script type="text/javascript" src="login.js"></script>
+	<script type="text/javascript" src="${baseurl}/static/viewJs/login.js"></script>
 	<script type="text/javascript" src="${baseurl}/static/js/cache.js"></script>
 </body>
 </html>

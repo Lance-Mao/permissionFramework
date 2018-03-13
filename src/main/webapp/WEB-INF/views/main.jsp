@@ -1,4 +1,5 @@
-<!DOCTYPE html>
+<%@ page contentType="text/html; charset=UTF-8" %>
+<%@ include file="./../public/tag.jsp" %>
 <html>
 <head>
 	<meta charset="utf-8">
@@ -9,8 +10,8 @@
 	<meta name="apple-mobile-web-app-status-bar-style" content="black">
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<meta name="format-detection" content="telephone=no">
-	<link rel="stylesheet" href="../layui/css/layui.css" media="all" />
-	<link rel="stylesheet" href="../css/public.css" media="all" />
+	<link rel="stylesheet" href="${baseurl}/static/layui/css/layui.css" media="all" />
+	<link rel="stylesheet" href="${baseurl}/static/css/public.css" media="all" />
 </head>
 <body class="childrenBody">
 	<blockquote class="layui-elem-quote layui-bg-green">
@@ -226,7 +227,7 @@
 		</div>
 	</div>
 
-	<script type="text/javascript" src="../layui/layui.js"></script>
-	<script type="text/javascript" src="../js/main.js"></script>
+	<script type="text/javascript" src="${baseurl}/static/layui/layui.js"></script>
+	<script type="text/javascript" src="${baseurl}/static/js/main.js"></script>
 </body>
 </html>

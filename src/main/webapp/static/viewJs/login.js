@@ -11,9 +11,10 @@ layui.use(['form','layer','jquery'],function(){
 
     //登录按钮
     form.on("submit(login)",function(data){
+        alert(JSON.stringify(data));
         $(this).text("登录中...").attr("disabled","disabled").addClass("layui-disabled");
         setTimeout(function(){
-            window.location.href = "/layuicms2.0";
+           login();
         },1000);
         return false;
     })
@@ -25,8 +26,10 @@ layui.use(['form','layer','jquery'],function(){
 
         $.ajax({
             url: baseUrl + "sys/login",
+            type: "post",
             data: {username:username,password:password},
             success: function (data) {
+                alert(JSON.stringify(data));
                 if (data.code === 0) {
                     location.href = baseUrl + "/index";
                 }else {

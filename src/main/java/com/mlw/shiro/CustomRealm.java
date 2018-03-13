@@ -36,8 +36,8 @@ public class CustomRealm extends AuthorizingRealm {
         //从数据库中获取动态权限数据
         Set<String> roleNames = new HashSet<String>();
         Set<String> permissions = new HashSet<String>();
-        roleNames.add("administrator");   //添加角色
-        permissions.add("newPage.html");  //添加权限
+        roleNames.add(null);   //添加角色
+        permissions.add(null);  //添加权限
 
         SimpleAuthorizationInfo info = new SimpleAuthorizationInfo(roleNames);
         info.setStringPermissions(permissions);
@@ -73,7 +73,7 @@ public class CustomRealm extends AuthorizingRealm {
 
         //将用户信息设置到simpleAuthenticationInfo
         SimpleAuthenticationInfo simpleAuthenticationInfo = new
-                SimpleAuthenticationInfo(sysUser, password, ByteSource.Util.bytes(salt), this.getName());
+                SimpleAuthenticationInfo(sysUser, password, this.getName());
 
         return simpleAuthenticationInfo;
     }

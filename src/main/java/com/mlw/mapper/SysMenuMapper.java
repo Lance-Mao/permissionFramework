@@ -3,6 +3,8 @@ package com.mlw.mapper;
 import com.mlw.entity.SysMenu;
 import com.mlw.entity.SysMenuExample;
 import java.util.List;
+import java.util.Map;
+
 import org.apache.ibatis.annotations.Param;
 
 public interface SysMenuMapper {
@@ -27,4 +29,6 @@ public interface SysMenuMapper {
     int updateByPrimaryKeySelective(SysMenu record);
 
     int updateByPrimaryKey(SysMenu record);
+
+    Map<String,Object> getMenus(String id);
 }

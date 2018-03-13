@@ -1,4 +1,5 @@
-<!DOCTYPE html>
+<%@ page contentType="text/html; charset=UTF-8" %>
+<%@ include file="./../public/tag.jsp" %>
 <html>
 <head>
 	<meta charset="utf-8">
@@ -11,8 +12,8 @@
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<meta name="format-detection" content="telephone=no">
 	<link rel="icon" href="favicon.ico">
-	<link rel="stylesheet" href="layui/css/layui.css" media="all" />
-	<link rel="stylesheet" href="css/index.css" media="all" />
+	<link rel="stylesheet" href="${baseurl}/static/layui/css/layui.css" media="all" />
+	<link rel="stylesheet" href="${baseurl}/static/css/index.css" media="all" />
 </head>
 <body class="main_body">
 	<div class="layui-layout layui-layout-admin">
@@ -73,7 +74,7 @@
 		<!-- 左侧导航 -->
 		<div class="layui-side layui-bg-black">
 			<div class="user-photo">
-				<a class="img" title="我的头像" ><img src="images/face.jpg" class="userAvatar"></a>
+				<a class="img" title="我的头像" ><img src="${baseurl}/static/images/face.jpg" class="userAvatar"></a>
 				<p>你好！<span class="userName">驊驊龔頾</span>, 欢迎登录</p>
 			</div>
 			<!-- 搜索 -->
@@ -111,7 +112,7 @@
 				</ul>
 				<div class="layui-tab-content clildFrame">
 					<div class="layui-tab-item layui-show">
-						<iframe src="page/main.html"></iframe>
+						<iframe src="${baseurl}/main"></iframe>
 					</div>
 				</div>
 			</div>
@@ -126,8 +127,8 @@
 	<div class="site-tree-mobile"><i class="layui-icon">&#xe602;</i></div>
 	<div class="site-mobile-shade"></div>
 
-	<script type="text/javascript" src="layui/layui.js"></script>
-	<script type="text/javascript" src="js/index.js"></script>
-	<script type="text/javascript" src="js/cache.js"></script>
+	<script type="text/javascript" src="${baseurl}/static/layui/layui.js"></script>
+	<script type="text/javascript" src="${baseurl}/static/js/index.js"></script>
+	<script type="text/javascript" src="${baseurl}/static/js/cache.js"></script>
 </body>
 </html>
