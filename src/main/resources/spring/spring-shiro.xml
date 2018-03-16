@@ -30,15 +30,16 @@
                 <!--静态资源通过-->
                 /login = anon
                 /static/**=anon
-                /getValidateCode = anon  <!--验证码-->
+                <!--/getValidateCode = anon  &lt;!&ndash;验证码&ndash;&gt;-->
                 /js/** = anon
-                /images/** = anon
-                /styles/** = anon
-                /public/** = anon
+                /viewJs/** = anon
+                <!--/images/** = anon-->
+                /sys/login = anon
+                <!--/public/** = anon-->
                 /toLogin/** = anon   <!--登录页面的地址-->
                 /noPermission/** = anon <!--跳转没有权限的页面-->
                 <!--表示所有请求url必须通过认证-->
-                <!--/**=  authc-->
+                /** =  authc
                 <!--请求logout，shrio擦除sssion-->
                 /logout = logout
             </value>

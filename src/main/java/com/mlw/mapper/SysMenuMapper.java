@@ -4,6 +4,7 @@ import com.mlw.entity.SysMenu;
 import com.mlw.entity.SysMenuExample;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.apache.ibatis.annotations.Param;
 
@@ -31,4 +32,6 @@ public interface SysMenuMapper {
     int updateByPrimaryKey(SysMenu record);
 
     Map<String,Object> getMenus(String id);
+
+    Set<String> findPermissionByUserId(String id);
 }

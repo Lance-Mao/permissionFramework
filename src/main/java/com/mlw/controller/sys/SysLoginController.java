@@ -22,12 +22,13 @@ import java.util.Map;
  */
 
 @Controller
+@RequestMapping("")
 public class SysLoginController {
 
     @Autowired
     private PermissionService permissionService;
 
-    @RequestMapping(value = "sys/login", method = RequestMethod.POST)
+    @RequestMapping(value = "/sys/login", method = RequestMethod.POST)
     @ResponseBody
     public R login(String username, String password) {
         try {
@@ -35,7 +36,7 @@ public class SysLoginController {
             UsernamePasswordToken token = new UsernamePasswordToken(username, password);
             subject.login(token);
         } catch (UnknownAccountException e) {
-            return R.error(e.getMessage());
+            return R.error("未知账户");
         }catch (IncorrectCredentialsException e) {
             return R.error("账号或密码不正确");
         }catch (LockedAccountException e) {
@@ -47,7 +48,7 @@ public class SysLoginController {
         return R.ok();
     }
 
-    @RequestMapping("getMenus")
+    @RequestMapping("/getMenus")
     @ResponseBody
     public R getMenus() {
         try {

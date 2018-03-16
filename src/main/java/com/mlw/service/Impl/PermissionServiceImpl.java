@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 @Service
 public class PermissionServiceImpl implements PermissionService {
@@ -32,5 +33,9 @@ public class PermissionServiceImpl implements PermissionService {
 
     public Map<String, Object> getMenus(String id) {
         return sysMenuMapper.getMenus(id);
+    }
+
+    public Set<String> findPermissionByUserId(String id) {
+        return sysMenuMapper.findPermissionByUserId(id);
     }
 }

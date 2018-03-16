@@ -2,6 +2,7 @@ package com.mlw.shiro;
 
 import com.mlw.entity.SysUser;
 import com.mlw.service.PermissionService;
+import com.mlw.service.RoleService;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
@@ -14,6 +15,7 @@ import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -22,6 +24,9 @@ public class CustomRealm extends AuthorizingRealm {
 
     @Autowired
     private PermissionService permissionService;
+
+    @Autowired
+    private RoleService roleService;
 
 
     /**
@@ -32,15 +37,18 @@ public class CustomRealm extends AuthorizingRealm {
         //将getPrimaryPrincipal方法返回值转为真实身份类型(在上边的goGetAuthenticationInfo认证通过填充到SimpleAuthenticationInfo)
         SysUser sysUser = (SysUser) principals.getPrimaryPrincipal();
 
+        SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
         //根据身份信息获取权限信息
         //从数据库中获取动态权限数据
-        Set<String> roleNames = new HashSet<String>();
-        Set<String> permissions = new HashSet<String>();
-        roleNames.add(null);   //添加角色
-        permissions.add(null);  //添加权限
 
-        SimpleAuthorizationInfo info = new SimpleAuthorizationInfo(roleNames);
+        //根据用户ID查询角色（role），放入到Authorization里。
+        Set<String> roles = roleService.findRoleByUserId(sysUser.getId());
+        info.setRoles(roles);
+
+        //根据用户ID查询权限（permission），放入到Authorization里。
+        Set<String> permissions = permissionService.findPermissionByUserId(sysUser.getId());
         info.setStringPermissions(permissions);
+
         return info;
     }
 

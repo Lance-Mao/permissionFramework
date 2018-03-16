@@ -3,6 +3,8 @@ package com.mlw.mapper;
 import com.mlw.entity.SysRole;
 import com.mlw.entity.SysRoleExample;
 import java.util.List;
+import java.util.Set;
+
 import org.apache.ibatis.annotations.Param;
 
 public interface SysRoleMapper {
@@ -27,4 +29,6 @@ public interface SysRoleMapper {
     int updateByPrimaryKeySelective(SysRole record);
 
     int updateByPrimaryKey(SysRole record);
+
+    Set<String> findRoleByUserId(String id);
 }
