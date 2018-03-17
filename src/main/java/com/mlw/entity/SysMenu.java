@@ -3,7 +3,7 @@ package com.mlw.entity;
 public class SysMenu {
     private String id;
 
-    private String menuname;
+    private String menuName;
 
     private String pid;
 
@@ -27,12 +27,12 @@ public class SysMenu {
         this.id = id == null ? null : id.trim();
     }
 
-    public String getMenuname() {
-        return menuname;
+    public String getMenuName() {
+        return menuName;
     }
 
-    public void setMenuname(String menuname) {
-        this.menuname = menuname == null ? null : menuname.trim();
+    public void setMenuName(String menuName) {
+        this.menuName = menuName;
     }
 
     public String getPid() {

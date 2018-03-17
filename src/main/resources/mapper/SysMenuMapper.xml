@@ -273,12 +273,12 @@
     where id = #{id,jdbcType=VARCHAR}
   </update>
 
-    <select id="getMenus" parameterType="string" resultType="map">
+    <select id="getMenus" parameterType="string" resultType="com.mlw.entity.SysMenu">
         select * from sys_menu m,sys_role_menu rm,sys_user_role ur
         WHERE userId = #{id} AND m.id = rm.menuId AND rm.roleId = ur.roleId
     </select>
 
-    <select id="findPermissionByUserId" parameterType="string" resultType="map">
+    <select id="findPermissionByUserId" parameterType="string" resultType="com.mlw.entity.SysMenu">
         select m.url from sys_menu m,sys_role_menu rm,sys_user_role ur
         WHERE userId = #{id} AND m.id = rm.menuId AND rm.roleId = ur.roleId
     </select>

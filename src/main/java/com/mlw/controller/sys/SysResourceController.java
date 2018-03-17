@@ -2,6 +2,7 @@ package com.mlw.controller.sys;
 
 import com.mlw.common.R;
 import com.mlw.common.ShiroUser;
+import com.mlw.common.dto.SysMenuDto;
 import com.mlw.entity.SysMenu;
 import com.mlw.service.PermissionService;
 import com.mlw.util.ShiroUtils;
@@ -28,7 +29,7 @@ public class SysResourceController {
     public R getMenus() {
         try {
             ShiroUser user = ShiroUtils.getUserEntity();
-            List<SysMenu> menus = permissionService.getMenus(user.getId());
+            List<SysMenuDto> menus = permissionService.getMenus(user.getId());
             return R.ok("menus",menus);
         } catch (Exception e) {
             e.printStackTrace();
