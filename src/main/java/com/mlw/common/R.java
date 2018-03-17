@@ -1,6 +1,7 @@
 package com.mlw.common;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -38,6 +39,12 @@ public class R extends HashMap<String,Object> {
     public static R ok(Map<String, Object> map) {
         R r = new R();
         r.putAll(map);
+        return r;
+    }
+
+    public static R ok(String key, Object o) {
+        R r = new R();
+        r.put(key,o);
         return r;
     }
 

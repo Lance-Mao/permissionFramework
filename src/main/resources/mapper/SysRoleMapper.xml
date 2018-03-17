@@ -210,6 +210,6 @@
   </update>
 
     <select id="findRoleByUserId" parameterType="string" resultType="string">
-        select * from sys_role r , sys_user_role ur WHERE ur.roleId = r.id AND ur.userId = #{id};
+        select r.roleName from sys_role r , sys_user_role ur WHERE ur.roleId = r.id AND ur.userId = #{id};
     </select>
 </mapper>

@@ -1,6 +1,7 @@
 var $,tab,dataStr,layer;
 layui.config({
-	base : "js/"
+    debug : true,
+	base : "static/js/"
 }).extend({
 	"bodyTab" : "bodyTab"
 })
@@ -11,39 +12,57 @@ layui.use(['bodyTab','form','element','layer','jquery'],function(){
     	layer = parent.layer === undefined ? layui.layer : top.layer;
 		tab = layui.bodyTab({
 			openTabNum : "50",  //最大可打开窗口数量
-			url : "json/navs.json" //获取菜单json地址
+			url : baseUrl + "/resource/getMenus" //获取菜单json地址
 		});
 
 
-    $.ajax({
-        url: baseUrl + "/getMenus",
-        type: "post",
-        success: function (data) {
-
-        }
-    });
 
 	//通过顶部菜单获取左侧二三级菜单   注：此处只做演示之用，实际开发中通过接口传参的方式获取导航数据
 	function getData(json){
+        //
+        // $.ajax({
+        //     url: baseUrl + "",
+        //     type: "post",
+        //     success: function (data) {
+        //         console.log(data);
+        //     }
+        // });
+
 		$.getJSON(tab.tabConfig.url,function(data){
-			if(json == "contentManagement"){
-                alert(JSON.stringify(data));
-				dataStr = data.contentManagement;
-				//重新渲染左侧菜单
-				tab.render();
-			}else if(json == "memberCenter"){
-				dataStr = data.memberCenter;
-				//重新渲染左侧菜单
-				tab.render();
-			}else if(json == "systemeSttings"){
-				dataStr = data.systemeSttings;
-				//重新渲染左侧菜单
-				tab.render();
-			}else if(json == "seraphApi"){
-                dataStr = data.seraphApi;
-                //重新渲染左侧菜单
-                tab.render();
+            loadTopMenu(data);
+
+            // layer.set({
+            //     elem: ".topLevelMenus",
+            //     data: data,
+            //     cache: false
+            // });
+
+		    for (let item of data) {
+                if (json == item.resource) {
+                    dataStr = item.resource;
+                    //重新渲染左侧菜单
+                    tab.render();
+                }
             }
+
+            // if(json == "contentManagement"){
+            //     console.log(data);
+				// dataStr = data.contentManagement;
+				// //重新渲染左侧菜单
+				// tab.render();
+            // }else if(json == "memberCenter"){
+				// dataStr = data.memberCenter;
+				// //重新渲染左侧菜单
+				// tab.render();
+            // }else if(json == "systemeSttings"){
+				// dataStr = data.systemeSttings;
+				// //重新渲染左侧菜单
+				// tab.render();
+            // }else if(json == "seraphApi"){
+            //     dataStr = data.seraphApi;
+            //     //重新渲染左侧菜单
+            //     tab.render();
+            // }
 		})
 	}
 	//页面加载时判断左侧菜单是否显示
@@ -146,6 +165,16 @@ layui.use(['bodyTab','form','element','layer','jquery'],function(){
 	}
 })
 
+//加载顶部菜单
+function loadTopMenu(data) {
+    console.log(data);
+    for (let item of data.menus) {
+        $(".topLevelMenus").append(`
+        <li class="layui-nav-item" data-menu=" ` + item.resource +` ">
+						<a href="javascript:;"><i class="layui-icon" data-icon="`+item.icon+`">`+item.icon+`</i><cite>`+item.menuName+`</cite></a>`)
+    }
+}
+
 //打开新窗口
 function addTab(_this){
 	tab.tabAdd(_this);
@@ -157,17 +186,17 @@ function donation(){
 		area : ['260px', '367px'],
 		tab : [{
 			title : "微信",
-			content : "<div style='padding:30px;overflow:hidden;background:#d2d0d0;'><img src='images/wechat.jpg'></div>"
+			content : "<div style='padding:30px;overflow:hidden;background:#d2d0d0;'><img src='/static/images/wechat.jpg'></div>"
 		},{
 			title : "支付宝",
-			content : "<div style='padding:30px;overflow:hidden;background:#d2d0d0;'><img src='images/alipay.jpg'></div>"
+			content : "<div style='padding:30px;overflow:hidden;background:#d2d0d0;'><img src='/static/images/alipay.jpg'></div>"
 		}]
 	})
 }
 
 //图片管理弹窗
 function showImg(){
-    $.getJSON('json/images.json', function(json){
+    $.getJSON('static/json/images.json', function(json){
         var res = json;
         layer.photos({
             photos: res,

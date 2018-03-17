@@ -28,7 +28,6 @@
         <property name="filterChainDefinitions">
             <value>
                 <!--静态资源通过-->
-                /login = anon
                 /static/**=anon
                 <!--/getValidateCode = anon  &lt;!&ndash;验证码&ndash;&gt;-->
                 /js/** = anon
@@ -38,10 +37,10 @@
                 <!--/public/** = anon-->
                 /toLogin/** = anon   <!--登录页面的地址-->
                 /noPermission/** = anon <!--跳转没有权限的页面-->
-                <!--表示所有请求url必须通过认证-->
-                /** =  authc
                 <!--请求logout，shrio擦除sssion-->
                 /logout = logout
+                <!--表示所有请求url必须通过认证-->
+                /** =  authc
             </value>
         </property>
     </bean>

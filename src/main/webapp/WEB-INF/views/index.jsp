@@ -12,6 +12,10 @@
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<meta name="format-detection" content="telephone=no">
 	<link rel="icon" href="favicon.ico">
+    <script type="text/javascript" src="${baseurl}/static/default/js/jquery-1.7.1.min.js"></script>
+    <script type="text/javascript" src="${baseurl}/static/layui/layui.js"></script>
+    <script type="text/javascript" src="${baseurl}/static/js/index.js"></script>
+    <script type="text/javascript" src="${baseurl}/static/js/cache.js"></script>
 	<link rel="stylesheet" href="${baseurl}/static/layui/css/layui.css" media="all" />
 	<link rel="stylesheet" href="${baseurl}/static/css/index.css" media="all" />
 </head>
@@ -36,18 +40,18 @@
 					</li>
 				</ul>
 				<ul class="layui-nav topLevelMenus" pc>
-					<li class="layui-nav-item layui-this" data-menu="contentManagement">
-						<a href="javascript:;"><i class="layui-icon" data-icon="&#xe63c;">&#xe63c;</i><cite>内容管理</cite></a>
-					</li>
-					<li class="layui-nav-item" data-menu="memberCenter" pc>
-						<a href="javascript:;"><i class="seraph icon-icon10" data-icon="icon-icon10"></i><cite>用户中心</cite></a>
-					</li>
-					<li class="layui-nav-item" data-menu="systemeSttings" pc>
-						<a href="javascript:;"><i class="layui-icon" data-icon="&#xe620;">&#xe620;</i><cite>系统设置</cite></a>
-					</li>
-					<li class="layui-nav-item" data-menu="seraphApi" pc>
-						<a href="javascript:;"><i class="layui-icon" data-icon="&#xe705;">&#xe705;</i><cite>使用文档</cite></a>
-					</li>
+					<%--<li class="layui-nav-item layui-this" data-menu="contentManagement">--%>
+						<%--<a href="javascript:;"><i class="layui-icon" data-icon="&#xe63c;">&#xe63c;</i><cite>内容管理</cite></a>--%>
+					<%--</li>--%>
+					<%--<li class="layui-nav-item" data-menu="memberCenter" pc>--%>
+						<%--<a href="javascript:;"><i class="seraph icon-icon10" data-icon="icon-icon10"></i><cite>用户中心</cite></a>--%>
+					<%--</li>--%>
+					<%--<li class="layui-nav-item" data-menu="systemeSttings" pc>--%>
+						<%--<a href="javascript:;"><i class="layui-icon" data-icon="&#xe620;">&#xe620;</i><cite>系统设置</cite></a>--%>
+					<%--</li>--%>
+					<%--<li class="layui-nav-item" data-menu="seraphApi" pc>--%>
+						<%--<a href="javascript:;"><i class="layui-icon" data-icon="&#xe705;">&#xe705;</i><cite>使用文档</cite></a>--%>
+					<%--</li>--%>
 				</ul>
 			    <!-- 顶部右侧菜单 -->
 			    <ul class="layui-nav top_menu">
@@ -126,9 +130,5 @@
 	<!-- 移动导航 -->
 	<div class="site-tree-mobile"><i class="layui-icon">&#xe602;</i></div>
 	<div class="site-mobile-shade"></div>
-
-	<script type="text/javascript" src="${baseurl}/static/layui/layui.js"></script>
-	<script type="text/javascript" src="${baseurl}/static/js/index.js"></script>
-	<script type="text/javascript" src="${baseurl}/static/js/cache.js"></script>
 </body>
 </html>

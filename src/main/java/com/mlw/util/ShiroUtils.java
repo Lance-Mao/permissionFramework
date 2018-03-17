@@ -1,6 +1,6 @@
 package com.mlw.util;
 
-import com.mlw.entity.SysUser;
+import com.mlw.common.ShiroUser;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.crypto.hash.SimpleHash;
 import org.apache.shiro.session.Session;
@@ -34,8 +34,8 @@ public class ShiroUtils {
         return SecurityUtils.getSubject();
     }
 
-    public static SysUser getUserEntity() {
-        return (SysUser) SecurityUtils.getSubject().getPrincipal();
+    public static ShiroUser getUserEntity() {
+        return (ShiroUser) SecurityUtils.getSubject().getPrincipal();
     }
 
     public static String getUserId() {

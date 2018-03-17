@@ -25,9 +25,6 @@ import java.util.Map;
 @RequestMapping("")
 public class SysLoginController {
 
-    @Autowired
-    private PermissionService permissionService;
-
     @RequestMapping(value = "/sys/login", method = RequestMethod.POST)
     @ResponseBody
     public R login(String username, String password) {
@@ -48,20 +45,6 @@ public class SysLoginController {
         return R.ok();
     }
 
-    @RequestMapping("/getMenus")
-    @ResponseBody
-    public R getMenus() {
-        try {
-            SysUser user = (SysUser) SecurityUtils.getSubject().getPrincipal();
-            Map<String, Object> menus = permissionService.getMenus(user.getId());
-
-            return R.ok();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return R.error();
-    }
 
     @RequestMapping("toLogin")
     public String toLogin() {

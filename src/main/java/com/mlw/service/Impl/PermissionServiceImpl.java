@@ -1,5 +1,6 @@
 package com.mlw.service.Impl;
 
+import com.mlw.entity.SysMenu;
 import com.mlw.entity.SysUser;
 import com.mlw.entity.SysUserExample;
 import com.mlw.mapper.SysMenuMapper;
@@ -31,7 +32,7 @@ public class PermissionServiceImpl implements PermissionService {
         return null;
     }
 
-    public Map<String, Object> getMenus(String id) {
+    public List<SysMenu> getMenus(String id) {
         return sysMenuMapper.getMenus(id);
     }
 

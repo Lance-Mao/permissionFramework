@@ -31,7 +31,7 @@ public interface SysMenuMapper {
 
     int updateByPrimaryKey(SysMenu record);
 
-    Map<String,Object> getMenus(String id);
+    List<SysMenu> getMenus(String id);
 
     Set<String> findPermissionByUserId(String id);
 }

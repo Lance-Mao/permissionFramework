@@ -275,11 +275,11 @@
 
     <select id="getMenus" parameterType="string" resultType="map">
         select * from sys_menu m,sys_role_menu rm,sys_user_role ur
-        WHERE userId = #{id} AND m.id = rm.menuId AND rm.id = ur.roleId
+        WHERE userId = #{id} AND m.id = rm.menuId AND rm.roleId = ur.roleId
     </select>
 
     <select id="findPermissionByUserId" parameterType="string" resultType="map">
-        select * from sys_menu m,sys_role_menu rm,sys_user_role ur
-        WHERE userId = #{id} AND m.id = rm.menuId AND rm.id = ur.roleId
+        select m.url from sys_menu m,sys_role_menu rm,sys_user_role ur
+        WHERE userId = #{id} AND m.id = rm.menuId AND rm.roleId = ur.roleId
     </select>
 </mapper>

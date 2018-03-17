@@ -1,5 +1,6 @@
 package com.mlw.shiro;
 
+import com.mlw.common.ShiroUser;
 import com.mlw.entity.SysUser;
 import com.mlw.service.PermissionService;
 import com.mlw.service.RoleService;
@@ -35,19 +36,17 @@ public class CustomRealm extends AuthorizingRealm {
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
         //从principal获取主身份信息
         //将getPrimaryPrincipal方法返回值转为真实身份类型(在上边的goGetAuthenticationInfo认证通过填充到SimpleAuthenticationInfo)
-        SysUser sysUser = (SysUser) principals.getPrimaryPrincipal();
+        ShiroUser sysUser = (ShiroUser) principals.getPrimaryPrincipal();
 
         SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
         //根据身份信息获取权限信息
         //从数据库中获取动态权限数据
 
         //根据用户ID查询角色（role），放入到Authorization里。
-        Set<String> roles = roleService.findRoleByUserId(sysUser.getId());
-        info.setRoles(roles);
+        info.setRoles(sysUser.getRoles());
 
         //根据用户ID查询权限（permission），放入到Authorization里。
-        Set<String> permissions = permissionService.findPermissionByUserId(sysUser.getId());
-        info.setStringPermissions(permissions);
+        info.setStringPermissions(sysUser.getUrlSet());
 
         return info;
     }
@@ -78,10 +77,21 @@ public class CustomRealm extends AuthorizingRealm {
         //盐 salt
         String salt = sysUser.getSalt();
 
+        //根据身份信息获取权限信息
+        //从数据库中获取动态权限数据
+
+        //根据用户ID查询角色（role），放入到Authorization里。
+        Set<String> roles = roleService.findRoleByUserId(sysUser.getId());
+
+        //根据用户ID查询权限（permission），放入到Authorization里。
+        Set<String> permissions = permissionService.findPermissionByUserId(sysUser.getId());
+
+        ShiroUser shiroUser = new ShiroUser(sysUser.getId(),sysUser.getUsername(),permissions);
+        shiroUser.setUrlSet(roles);
 
         //将用户信息设置到simpleAuthenticationInfo
         SimpleAuthenticationInfo simpleAuthenticationInfo = new
-                SimpleAuthenticationInfo(sysUser, password, this.getName());
+                SimpleAuthenticationInfo(shiroUser, password, this.getName());
 
         return simpleAuthenticationInfo;
     }
