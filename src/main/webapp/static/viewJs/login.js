@@ -15,7 +15,6 @@ layui.use(['form', 'layer', 'jquery'], function () {
         let username = $("#userName").val();
         let password = $("#password").val();
         let imgCode = $("#imgCode").val();
-        alert(123456);
         $(this).text("登录中...").attr("disabled", "disabled").addClass("layui-disabled");
         setTimeout(function () {
             $.ajax({

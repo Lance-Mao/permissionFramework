@@ -1,67 +1,66 @@
-var $,tab,dataStr,layer,allMenuInfo;
+var $, tab, dataStr, layer;
 layui.config({
-    debug : true,
-	base : "static/js/"
+    debug: true,
+    base: "static/js/"
 }).extend({
-	"bodyTab" : "bodyTab"
+    "bodyTab": "bodyTab"
 })
 layui.use(['bodyTab', 'form', 'element', 'layer', 'jquery'], function () {
     var form = layui.form,
         element = layui.element;
     $ = layui.$;
     layer = parent.layer === undefined ? layui.layer : top.layer;
+
+    var allMenuInfo;
+
     tab = layui.bodyTab({
         openTabNum: "50",  //最大可打开窗口数量
         url: baseUrl + "/resource/getMenus" //获取菜单json地址
     });
 
+    //界面初始化
+    $.getJSON(tab.tabConfig.url, function (data) {
+        allMenuInfo = data.menus;
+        loadTopMenu(data);
+        form.render();
+        getData(allMenuInfo[0].resource)
+    })
+
 
     //通过顶部菜单获取左侧二三级菜单   注：此处只做演示之用，实际开发中通过接口传参的方式获取导航数据
     function getData(json) {
 
-        $.getJSON(tab.tabConfig.url, function (data) {
-            allMenuInfo = data.menus;
-            loadTopMenu(data);
-
-            for (let item of data.menus) {
-                if (json == item.resource) {
-                    dataStr = item.sysMenuDtoList;
-                    //重新渲染左侧菜单
-                    tab.render();
-                }
+        var dataInfo = allMenuInfo;
+        for (let item of dataInfo) {
+            if (json == item.resource) {
+                dataStr = item.sysMenuDtoList;
+                //重新渲染左侧菜单
+                tab.render();
             }
-            if (dataStr == null) {
-                dataStr = data.menus[0].sysMenuDtoList;
-            }
-
-            console.log(dataStr);
-
-
-            // if(json == "contentManagement"){
-            //     console.log(data);
-            // dataStr = data.contentManagement;
-            // //重新渲染左侧菜单
-            // tab.render();
-            // }else if(json == "memberCenter"){
-            // dataStr = data.memberCenter;
-            // //重新渲染左侧菜单
-            // tab.render();
-            // }else if(json == "systemeSttings"){
-            // dataStr = data.systemeSttings;
-            // //重新渲染左侧菜单
-            // tab.render();
-            // }else if(json == "seraphApi"){
-            //     dataStr = data.seraphApi;
-            //     //重新渲染左侧菜单
-            //     tab.render();
-            // }
-        })
+        }
+        // if(json == "contentManagement"){
+        //     console.log(data);
+        // dataStr = data.contentManagement;
+        // //重新渲染左侧菜单
+        // tab.render();
+        // }else if(json == "memberCenter"){
+        // dataStr = data.memberCenter;
+        // //重新渲染左侧菜单
+        // tab.render();
+        // }else if(json == "systemeSttings"){
+        // dataStr = data.systemeSttings;
+        // //重新渲染左侧菜单
+        // tab.render();
+        // }else if(json == "seraphApi"){
+        //     dataStr = data.seraphApi;
+        //     //重新渲染左侧菜单
+        //     tab.render();
+        // }
     }
 
     //页面加载时判断左侧菜单是否显示
     //通过顶部菜单获取左侧菜单
-    $(".topLevelMenus li,.mobileTopLevelMenus dd").click(function () {
-        alert(231);
+    $(".topLevelMenus,.mobileTopLevelMenus").on('click', '.topLevelMenus li,.mobileTopLevelMenus dd', function () {
         if ($(this).parents(".mobileTopLevelMenus").length != "0") {
             $(".topLevelMenus li").eq($(this).index()).addClass("layui-this").siblings().removeClass("layui-this");
         } else {
@@ -86,7 +85,7 @@ layui.use(['bodyTab', 'form', 'element', 'layer', 'jquery'], function () {
     })
 
     //通过顶部菜单获取左侧二三级菜单   注：此处只做演示之用，实际开发中通过接口传参的方式获取导航数据
-    getData();
+    // getData();
 
     //手机设备的简单适配
     $('.site-dto-mobile').on('click', function () {
@@ -163,40 +162,40 @@ layui.use(['bodyTab', 'form', 'element', 'layer', 'jquery'], function () {
 function loadTopMenu(data) {
     for (let item of data.menus) {
         $(".topLevelMenus").append(`
-        <li class="layui-nav-item"data-menu="` + item.resource +`">
-						<a href="javascript:;"><i class="layui-icon" data-icon="`+item.icon+`">`+item.icon+`</i><cite>`+item.menuName+`</cite></a>`)
+        <li class="layui-nav-item"data-menu="` + item.resource + `">
+						<a href="javascript:;"><i class="layui-icon" data-icon="` + item.icon + `">` + item.icon + `</i><cite>` + item.menuName + `</cite></a>`)
     }
-    $(".mobileTopLevelMenus").html("").append(`<li class="layui-nav-item" data-menu="`+data.menus[0].resource+`">
+    $(".mobileTopLevelMenus").html("").append(`<li class="layui-nav-item" data-menu="` + data.menus[0].resource + `">
 						<a href="javascript:;"><i class="seraph icon-caidan"></i><cite>layuiCMS</cite></a>
 						<dl class="layui-nav-child">`)
     for (let elem of data.menus) {
-        $(".mobileTopLevelMenus").append(`<dd data-menu="`+elem.resource+`"><a href="javascript:;"><i class="layui-icon" data-icon="`+elem.icon+`">`+elem.icon+`</i><cite>`+elem.menuName+`</cite></a></dd>`)
+        $(".mobileTopLevelMenus").append(`<dd data-menu="` + elem.resource + `"><a href="javascript:;"><i class="layui-icon" data-icon="` + elem.icon + `">` + elem.icon + `</i><cite>` + elem.menuName + `</cite></a></dd>`)
     }
     $(".mobileTopLevelMenus").append(`</dl></li>`);
 }
 
 //打开新窗口
-function addTab(_this){
-	tab.tabAdd(_this);
+function addTab(_this) {
+    tab.tabAdd(_this);
 }
 
 //捐赠弹窗
-function donation(){
-	layer.tab({
-		area : ['260px', '367px'],
-		tab : [{
-			title : "微信",
-			content : "<div style='padding:30px;overflow:hidden;background:#d2d0d0;'><img src='/static/images/wechat.jpg'></div>"
-		},{
-			title : "支付宝",
-			content : "<div style='padding:30px;overflow:hidden;background:#d2d0d0;'><img src='/static/images/alipay.jpg'></div>"
-		}]
-	})
+function donation() {
+    layer.tab({
+        area: ['260px', '367px'],
+        tab: [{
+            title: "微信",
+            content: "<div style='padding:30px;overflow:hidden;background:#d2d0d0;'><img src='/static/images/wechat.jpg'></div>"
+        }, {
+            title: "支付宝",
+            content: "<div style='padding:30px;overflow:hidden;background:#d2d0d0;'><img src='/static/images/alipay.jpg'></div>"
+        }]
+    })
 }
 
 //图片管理弹窗
-function showImg(){
-    $.getJSON('static/json/images.json', function(json){
+function showImg() {
+    $.getJSON('static/json/images.json', function (json) {
         var res = json;
         layer.photos({
             photos: res,

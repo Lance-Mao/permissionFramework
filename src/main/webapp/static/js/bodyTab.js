@@ -19,7 +19,6 @@ layui.define(["element", "jquery"], function (exports) {
         };
     //生成左侧菜单
     Tab.prototype.navBar = function (strData) {
-        alert(258);
         var data;
         if (typeof(strData) == "string") {
             var data = JSON.parse(strData); //部分用户解析出来的是字符串，转换一下
@@ -42,7 +41,7 @@ layui.define(["element", "jquery"], function (exports) {
                         ulHtml += '<i class="layui-icon" data-icon="' + data[i].icon + '">' + data[i].icon + '</i>';
                     }
                 }
-                ulHtml += '<cite>' + data[i].title + '</cite>';
+                ulHtml += '<cite>' + data[i].menuName + '</cite>';
                 ulHtml += '<span class="layui-nav-more"></span>';
                 ulHtml += '</a>';
                 ulHtml += '<dl class="layui-nav-child">';
@@ -59,7 +58,7 @@ layui.define(["element", "jquery"], function (exports) {
                             ulHtml += '<i class="layui-icon" data-icon="' + data[i].sysMenuDtoList[j].icon + '">' + data[i].sysMenuDtoList[j].icon + '</i>';
                         }
                     }
-                    ulHtml += '<cite>' + data[i].sysMenuDtoList[j].title + '</cite></a></dd>';
+                    ulHtml += '<cite>' + data[i].sysMenuDtoList[j].menuName + '</cite></a></dd>';
                 }
                 ulHtml += "</dl>";
             } else {
@@ -75,7 +74,7 @@ layui.define(["element", "jquery"], function (exports) {
                         ulHtml += '<i class="layui-icon" data-icon="' + data[i].icon + '">' + data[i].icon + '</i>';
                     }
                 }
-                ulHtml += '<cite>' + data[i].title + '</cite></a>';
+                ulHtml += '<cite>' + data[i].menuName + '</cite></a>';
             }
             ulHtml += '</li>';
         }
