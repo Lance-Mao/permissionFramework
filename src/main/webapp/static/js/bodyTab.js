@@ -19,6 +19,7 @@ layui.define(["element", "jquery"], function (exports) {
         };
     //生成左侧菜单
     Tab.prototype.navBar = function (strData) {
+        alert(258);
         var data;
         if (typeof(strData) == "string") {
             var data = JSON.parse(strData); //部分用户解析出来的是字符串，转换一下
@@ -32,7 +33,7 @@ layui.define(["element", "jquery"], function (exports) {
             } else {
                 ulHtml += '<li class="layui-nav-item">';
             }
-            if (data[i].children != undefined && data[i].children.length > 0) {
+            if (data[i].sysMenuDtoList != undefined && data[i].sysMenuDtoList.length > 0) {
                 ulHtml += '<a>';
                 if (data[i].icon != undefined && data[i].icon != '') {
                     if (data[i].icon.indexOf("icon-") != -1) {
@@ -45,27 +46,27 @@ layui.define(["element", "jquery"], function (exports) {
                 ulHtml += '<span class="layui-nav-more"></span>';
                 ulHtml += '</a>';
                 ulHtml += '<dl class="layui-nav-child">';
-                for (var j = 0; j < data[i].children.length; j++) {
-                    if (data[i].children[j].target == "_blank") {
-                        ulHtml += '<dd><a data-url="' + data[i].children[j].href + '" target="' + data[i].children[j].target + '">';
+                for (var j = 0; j < data[i].sysMenuDtoList.length; j++) {
+                    if (data[i].sysMenuDtoList[j].target == "_blank") {
+                        ulHtml += '<dd><a data-url="' + data[i].sysMenuDtoList[j].url + '" target="' + data[i].sysMenuDtoList[j].target + '">';
                     } else {
-                        ulHtml += '<dd><a data-url="' + data[i].children[j].href + '">';
+                        ulHtml += '<dd><a data-url="' + data[i].sysMenuDtoList[j].url + '">';
                     }
-                    if (data[i].children[j].icon != undefined && data[i].children[j].icon != '') {
-                        if (data[i].children[j].icon.indexOf("icon-") != -1) {
-                            ulHtml += '<i class="seraph ' + data[i].children[j].icon + '" data-icon="' + data[i].children[j].icon + '"></i>';
+                    if (data[i].sysMenuDtoList[j].icon != undefined && data[i].sysMenuDtoList[j].icon != '') {
+                        if (data[i].sysMenuDtoList[j].icon.indexOf("icon-") != -1) {
+                            ulHtml += '<i class="seraph ' + data[i].sysMenuDtoList[j].icon + '" data-icon="' + data[i].sysMenuDtoList[j].icon + '"></i>';
                         } else {
-                            ulHtml += '<i class="layui-icon" data-icon="' + data[i].children[j].icon + '">' + data[i].children[j].icon + '</i>';
+                            ulHtml += '<i class="layui-icon" data-icon="' + data[i].sysMenuDtoList[j].icon + '">' + data[i].sysMenuDtoList[j].icon + '</i>';
                         }
                     }
-                    ulHtml += '<cite>' + data[i].children[j].title + '</cite></a></dd>';
+                    ulHtml += '<cite>' + data[i].sysMenuDtoList[j].title + '</cite></a></dd>';
                 }
                 ulHtml += "</dl>";
             } else {
                 if (data[i].target == "_blank") {
-                    ulHtml += '<a data-url="' + data[i].href + '" target="' + data[i].target + '">';
+                    ulHtml += '<a data-url="' + data[i].url + '" target="' + data[i].target + '">';
                 } else {
-                    ulHtml += '<a data-url="' + data[i].href + '">';
+                    ulHtml += '<a data-url="' + data[i].url + '">';
                 }
                 if (data[i].icon != undefined && data[i].icon != '') {
                     if (data[i].icon.indexOf("icon-") != -1) {
@@ -84,7 +85,7 @@ layui.define(["element", "jquery"], function (exports) {
     Tab.prototype.render = function () {
         //显示左侧菜单
         var _this = this;
-        $(".navBar ul").html('<li class="layui-nav-item layui-this"><a data-url="page/main.jsp"><i class="layui-icon" data-icon=""></i><cite>后台首页</cite></a></li>').append(_this.navBar(dataStr)).height($(window).height() - 210);
+        $(".navBar ul").html('<li class="layui-nav-item layui-this"><a data-url="views/main.jsp"><i class="layui-icon" data-icon=""></i><cite>后台首页</cite></a></li>').append(_this.navBar(dataStr)).height($(window).height() - 210);
         element.init();  //初始化页面元素
         $(window).resize(function () {
             $(".navBar").height($(window).height() - 210);

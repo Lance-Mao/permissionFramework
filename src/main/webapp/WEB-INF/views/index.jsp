@@ -30,13 +30,13 @@
 				<!-- 顶级菜单 -->
 				<ul class="layui-nav mobileTopLevelMenus" mobile>
 					<li class="layui-nav-item" data-menu="contentManagement">
-						<a href="javascript:;"><i class="seraph icon-caidan"></i><cite>layuiCMS</cite></a>
-						<dl class="layui-nav-child">
-							<dd class="layui-this" data-menu="contentManagement"><a href="javascript:;"><i class="layui-icon" data-icon="&#xe63c;">&#xe63c;</i><cite>内容管理</cite></a></dd>
-							<dd data-menu="memberCenter"><a href="javascript:;"><i class="seraph icon-icon10" data-icon="icon-icon10"></i><cite>用户中心</cite></a></dd>
-							<dd data-menu="systemeSttings"><a href="javascript:;"><i class="layui-icon" data-icon="&#xe620;">&#xe620;</i><cite>系统设置</cite></a></dd>
-							<dd data-menu="seraphApi"><a href="javascript:;"><i class="layui-icon" data-icon="&#xe705;">&#xe705;</i><cite>使用文档</cite></a></dd>
-						</dl>
+						<%--<a href="javascript:;"><i class="seraph icon-caidan"></i><cite>layuiCMS</cite></a>--%>
+						<%--<dl class="layui-nav-child">--%>
+							<%--<dd class="layui-this" data-menu="contentManagement"><a href="javascript:;"><i class="layui-icon" data-icon="&#xe63c;">&#xe63c;</i><cite>内容管理</cite></a></dd>--%>
+							<%--<dd data-menu="memberCenter"><a href="javascript:;"><i class="seraph icon-icon10" data-icon="icon-icon10"></i><cite>用户中心</cite></a></dd>--%>
+							<%--<dd data-menu="systemeSttings"><a href="javascript:;"><i class="layui-icon" data-icon="&#xe620;">&#xe620;</i><cite>系统设置</cite></a></dd>--%>
+							<%--<dd data-menu="seraphApi"><a href="javascript:;"><i class="layui-icon" data-icon="&#xe705;">&#xe705;</i><cite>使用文档</cite></a></dd>--%>
+						<%--</dl>--%>
 					</li>
 				</ul>
 				<ul class="layui-nav topLevelMenus" pc>
@@ -62,7 +62,7 @@
 						<a href="javascript:;"><i class="seraph icon-lock"></i><cite>锁屏</cite></a>
 					</li>
 					<li class="layui-nav-item" id="userInfo">
-						<a href="javascript:;"><img src="images/face.jpg" class="layui-nav-img userAvatar" width="35" height="35"><cite class="adminName">驊驊龔頾</cite></a>
+						<a href="javascript:;"><img src="/static/images/face.jpg" class="layui-nav-img userAvatar" width="35" height="35"><cite class="adminName">驊驊龔頾</cite></a>
 						<dl class="layui-nav-child">
 							<dd><a href="javascript:;" data-url="page/user/userInfo.html"><i class="seraph icon-ziliao" data-icon="icon-ziliao"></i><cite>个人资料</cite></a></dd>
 							<dd><a href="javascript:;" data-url="page/user/changePwd.html"><i class="seraph icon-xiugai" data-icon="icon-xiugai"></i><cite>修改密码</cite></a></dd>

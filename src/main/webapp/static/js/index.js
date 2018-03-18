@@ -1,130 +1,124 @@
-var $,tab,dataStr,layer;
+var $,tab,dataStr,layer,allMenuInfo;
 layui.config({
     debug : true,
 	base : "static/js/"
 }).extend({
 	"bodyTab" : "bodyTab"
 })
-layui.use(['bodyTab','form','element','layer','jquery'],function(){
-	var form = layui.form,
-		element = layui.element;
-		$ = layui.$;
-    	layer = parent.layer === undefined ? layui.layer : top.layer;
-		tab = layui.bodyTab({
-			openTabNum : "50",  //最大可打开窗口数量
-			url : baseUrl + "/resource/getMenus" //获取菜单json地址
-		});
+layui.use(['bodyTab', 'form', 'element', 'layer', 'jquery'], function () {
+    var form = layui.form,
+        element = layui.element;
+    $ = layui.$;
+    layer = parent.layer === undefined ? layui.layer : top.layer;
+    tab = layui.bodyTab({
+        openTabNum: "50",  //最大可打开窗口数量
+        url: baseUrl + "/resource/getMenus" //获取菜单json地址
+    });
 
 
+    //通过顶部菜单获取左侧二三级菜单   注：此处只做演示之用，实际开发中通过接口传参的方式获取导航数据
+    function getData(json) {
 
-	//通过顶部菜单获取左侧二三级菜单   注：此处只做演示之用，实际开发中通过接口传参的方式获取导航数据
-	function getData(json){
-        //
-        // $.ajax({
-        //     url: baseUrl + "",
-        //     type: "post",
-        //     success: function (data) {
-        //         console.log(data);
-        //     }
-        // });
-
-		$.getJSON(tab.tabConfig.url,function(data){
+        $.getJSON(tab.tabConfig.url, function (data) {
+            allMenuInfo = data.menus;
             loadTopMenu(data);
 
-            // layer.set({
-            //     elem: ".topLevelMenus",
-            //     data: data,
-            //     cache: false
-            // });
-
-		    for (let item of data) {
+            for (let item of data.menus) {
                 if (json == item.resource) {
-                    dataStr = item.resource;
+                    dataStr = item.sysMenuDtoList;
                     //重新渲染左侧菜单
                     tab.render();
                 }
             }
+            if (dataStr == null) {
+                dataStr = data.menus[0].sysMenuDtoList;
+            }
+
+            console.log(dataStr);
+
 
             // if(json == "contentManagement"){
             //     console.log(data);
-				// dataStr = data.contentManagement;
-				// //重新渲染左侧菜单
-				// tab.render();
+            // dataStr = data.contentManagement;
+            // //重新渲染左侧菜单
+            // tab.render();
             // }else if(json == "memberCenter"){
-				// dataStr = data.memberCenter;
-				// //重新渲染左侧菜单
-				// tab.render();
+            // dataStr = data.memberCenter;
+            // //重新渲染左侧菜单
+            // tab.render();
             // }else if(json == "systemeSttings"){
-				// dataStr = data.systemeSttings;
-				// //重新渲染左侧菜单
-				// tab.render();
+            // dataStr = data.systemeSttings;
+            // //重新渲染左侧菜单
+            // tab.render();
             // }else if(json == "seraphApi"){
             //     dataStr = data.seraphApi;
             //     //重新渲染左侧菜单
             //     tab.render();
             // }
-		})
-	}
-	//页面加载时判断左侧菜单是否显示
-	//通过顶部菜单获取左侧菜单
-	$(".topLevelMenus li,.mobileTopLevelMenus dd").click(function(){
-		if($(this).parents(".mobileTopLevelMenus").length != "0"){
-			$(".topLevelMenus li").eq($(this).index()).addClass("layui-this").siblings().removeClass("layui-this");
-		}else{
-			$(".mobileTopLevelMenus dd").eq($(this).index()).addClass("layui-this").siblings().removeClass("layui-this");
-		}
-		$(".layui-layout-admin").removeClass("showMenu");
-		$("body").addClass("site-mobile");
-		getData($(this).data("menu"));
-		//渲染顶部窗口
-		tab.tabMove();
-	})
+        })
+    }
 
-	//隐藏左侧导航
-	$(".hideMenu").click(function(){
-		if($(".topLevelMenus li.layui-this a").data("url")){
-			layer.msg("此栏目状态下左侧菜单不可展开");  //主要为了避免左侧显示的内容与顶部菜单不匹配
-			return false;
-		}
-		$(".layui-layout-admin").toggleClass("showMenu");
-		//渲染顶部窗口
-		tab.tabMove();
-	})
-
-	//通过顶部菜单获取左侧二三级菜单   注：此处只做演示之用，实际开发中通过接口传参的方式获取导航数据
-	getData("contentManagement");
-
-	//手机设备的简单适配
-    $('.site-dto-mobile').on('click', function(){
-		$('body').addClass('site-mobile');
-	});
-    $('.site-mobile-shade').on('click', function(){
-		$('body').removeClass('site-mobile');
-	});
-
-	// 添加新窗口
-	$("body").on("click",".layui-nav .layui-nav-item a:not('.mobileTopLevelMenus .layui-nav-item a')",function(){
-		//如果不存在子级
-		if($(this).siblings().length == 0){
-			addTab($(this));
-			$('body').removeClass('site-mobile');  //移动端点击菜单关闭菜单层
-		}
-		$(this).parent("li").siblings().removeClass("layui-nav-itemed");
-	})
-
-	//清除缓存
-	$(".clearCache").click(function(){
-		window.sessionStorage.clear();
-        window.localStorage.clear();
-        var index = layer.msg('清除缓存中，请稍候',{icon: 16,time:false,shade:0.8});
-        setTimeout(function(){
-            layer.close(index);
-            layer.msg("缓存清除成功！");
-        },1000);
+    //页面加载时判断左侧菜单是否显示
+    //通过顶部菜单获取左侧菜单
+    $(".topLevelMenus li,.mobileTopLevelMenus dd").click(function () {
+        alert(231);
+        if ($(this).parents(".mobileTopLevelMenus").length != "0") {
+            $(".topLevelMenus li").eq($(this).index()).addClass("layui-this").siblings().removeClass("layui-this");
+        } else {
+            $(".mobileTopLevelMenus dd").eq($(this).index()).addClass("layui-this").siblings().removeClass("layui-this");
+        }
+        $(".layui-layout-admin").removeClass("showMenu");
+        $("body").addClass("site-mobile");
+        getData($(this).data("menu"));
+        //渲染顶部窗口
+        tab.tabMove();
     })
 
-	//刷新后还原打开的窗口
-    if(cacheStr == "true") {
+    //隐藏左侧导航
+    $(".hideMenu").click(function () {
+        if ($(".topLevelMenus li.layui-this a").data("url")) {
+            layer.msg("此栏目状态下左侧菜单不可展开");  //主要为了避免左侧显示的内容与顶部菜单不匹配
+            return false;
+        }
+        $(".layui-layout-admin").toggleClass("showMenu");
+        //渲染顶部窗口
+        tab.tabMove();
+    })
+
+    //通过顶部菜单获取左侧二三级菜单   注：此处只做演示之用，实际开发中通过接口传参的方式获取导航数据
+    getData();
+
+    //手机设备的简单适配
+    $('.site-dto-mobile').on('click', function () {
+        $('body').addClass('site-mobile');
+    });
+    $('.site-mobile-shade').on('click', function () {
+        $('body').removeClass('site-mobile');
+    });
+
+    // 添加新窗口
+    $("body").on("click", ".layui-nav .layui-nav-item a:not('.mobileTopLevelMenus .layui-nav-item a')", function () {
+        //如果不存在子级
+        if ($(this).siblings().length == 0) {
+            addTab($(this));
+            $('body').removeClass('site-mobile');  //移动端点击菜单关闭菜单层
+        }
+        $(this).parent("li").siblings().removeClass("layui-nav-itemed");
+    })
+
+    //清除缓存
+    $(".clearCache").click(function () {
+        window.sessionStorage.clear();
+        window.localStorage.clear();
+        var index = layer.msg('清除缓存中，请稍候', {icon: 16, time: false, shade: 0.8});
+        setTimeout(function () {
+            layer.close(index);
+            layer.msg("缓存清除成功！");
+        }, 1000);
+    })
+
+    //刷新后还原打开的窗口
+    if (cacheStr == "true") {
         if (window.sessionStorage.getItem("menu") != null) {
             menu = JSON.parse(window.sessionStorage.getItem("menu"));
             curmenu = window.sessionStorage.getItem("curmenu");
@@ -159,20 +153,26 @@ layui.use(['bodyTab','form','element','layer','jquery'],function(){
             //渲染顶部窗口
             tab.tabMove();
         }
-    }else{
-		window.sessionStorage.removeItem("menu");
-		window.sessionStorage.removeItem("curmenu");
-	}
-})
+    } else {
+        window.sessionStorage.removeItem("menu");
+        window.sessionStorage.removeItem("curmenu");
+    }
+});
 
 //加载顶部菜单
 function loadTopMenu(data) {
-    console.log(data);
     for (let item of data.menus) {
         $(".topLevelMenus").append(`
         <li class="layui-nav-item"data-menu="` + item.resource +`">
-						<a href="javascript:;"><i class="layui-icon" data-icon="`+item.icon+`">`+item.icon+`</i><cite>`+item.menuname+`</cite></a>`)
+						<a href="javascript:;"><i class="layui-icon" data-icon="`+item.icon+`">`+item.icon+`</i><cite>`+item.menuName+`</cite></a>`)
     }
+    $(".mobileTopLevelMenus").html("").append(`<li class="layui-nav-item" data-menu="`+data.menus[0].resource+`">
+						<a href="javascript:;"><i class="seraph icon-caidan"></i><cite>layuiCMS</cite></a>
+						<dl class="layui-nav-child">`)
+    for (let elem of data.menus) {
+        $(".mobileTopLevelMenus").append(`<dd data-menu="`+elem.resource+`"><a href="javascript:;"><i class="layui-icon" data-icon="`+elem.icon+`">`+elem.icon+`</i><cite>`+elem.menuName+`</cite></a></dd>`)
+    }
+    $(".mobileTopLevelMenus").append(`</dl></li>`);
 }
 
 //打开新窗口
