@@ -14,4 +14,6 @@ public interface PermissionService {
     List<SysMenuDto> getMenus(String id);
 
     Set<String> findPermissionByUserId(String id);
+
+    List<SysMenuDto> getAllResource();
 }

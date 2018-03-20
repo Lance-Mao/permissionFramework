@@ -120,4 +120,18 @@ public class PermissionServiceImpl implements PermissionService {
     public Set<String> findPermissionByUserId(String id) {
         return sysMenuMapper.findPermissionByUserId(id);
     }
+
+    public List<SysMenuDto> getAllResource() {
+        //取出所有数据
+        List<SysMenu> sysMenus = sysMenuMapper.getAllResource();
+
+        //对数据进行简单的封装
+        List<SysMenuDto> dtoList = Lists.newArrayList();
+        for (SysMenu sysMenu : sysMenus) {
+            SysMenuDto sysMenuDto = SysMenuDto.adapt(sysMenu);
+            dtoList.add(sysMenuDto);
+        }
+
+        return menuListToTree(dtoList);
+    }
 }

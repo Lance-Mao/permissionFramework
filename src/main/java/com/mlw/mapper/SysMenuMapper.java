@@ -34,4 +34,6 @@ public interface SysMenuMapper {
     List<SysMenu> getMenus(String id);
 
     Set<String> findPermissionByUserId(String id);
+
+    List<SysMenu> getAllResource();
 }
