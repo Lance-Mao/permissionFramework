@@ -1,36 +1,64 @@
-layui.use(['form', 'layer','element', 'laydate', 'table', 'laytpl'], function () {
-    var form = layui.form,
-        element = layui.element,
-        layer = parent.layer === undefined ? layui.layer : top.layer,
-        $ = layui.jquery,
-        laydate = layui.laydate,
-        laytpl = layui.laytpl,
-        table = layui.table;
+var prefix = "/permissionOperation";
 
-    //资源列表
-    var tableIns = table.render({
-        elem: "#resourceList",
-        url: baseUrl + "/permissionOperation/getAllResource",
-        cellMinWidth : 95,
-        page : false,
-        height : "full-125",
-        id : "resourceList",
-        cols : [[
-            {type: "checkbox", fixed:"left", width:50},
-            {field: 'id', title: 'ID', width:60, align:"center"},
-            {field: 'menuName', title: '菜单名称', width:350},
-            {field: 'pid', title: '上级id', align:'center'},
-            {field: 'url', title: '资源路径', align:'center'},
-            {field: 'icon', title: '图标', align:'center'},
-            {field: 'sort', title: '排序', align:'center'},
-            {field: 'deep', title: '深度', align:'center'},
-            {field: 'resource', title: '资源标识', align:'center'},
-            {title: '操作', width:170, templet:'#newsListBar',fixed:"right",align:"center"}
-        ]]
-    })
+window.onload = function () {
+    loading();
+}
 
-    //监听折叠
-    element.on('collapse(test)', function(data){
-        layer.msg('展开状态：'+ data.show);
-    });
-});
+function loading() {
+    var columns = [
+        {
+            title: "菜单编号",
+            field: "id",
+            visible: false,
+            align: 'center',
+            valign: 'middle',
+            width: '10%'
+        },
+        {
+            title: "菜单名称",
+            field: "menuName"
+        },
+        {
+            title: "请求地址",
+            field: "url"
+        },
+        {
+            title: "图表",
+            field: "icon"
+        },
+        {
+            title: "排序",
+            field: "sort"
+        },
+        {
+            title: '类型',
+            field: 'menuType',
+            align: 'center',
+            valign: 'middle',
+            formatter: function (item, index) {
+                if (item.menuType == 'M') {
+                    return '<span class="label label-primary">目录</span>';
+                }
+                if (item.menuType == 'C') {
+                    return '<span class="label label-success">菜单</span>';
+                }
+                if (item.menuType == 'F') {
+                    return '<span class="label label-warning">按钮</span>';
+                }
+            }
+        },
+        {
+            title: '操作',
+            align: 'center',
+            formatter: function (row, index) {
+                var actions = [];
+                actions.push('<a class="btn btn-primary btn-sm" href="#" title="编辑" mce_href="#" onclick="edit(\'' + row.id + '\')"><i class="fa fa-edit"></i></a>');
+                actions.push('<a class="btn btn-primary btn-sm" href="#" title="新增" mce_href="#" onclick="add(\'' + row.id + '\')"><i class="fa fa-plus"></i></a>');
+                actions.push('<a class="btn btn-warning btn-sm" href="#" title="删除" mce_href="#" onclick="remove(\'' + row.id + '\')"><i class="fa fa-remove"></i></a>');
+                return actions.join('');
+            }
+        }];
+
+    var url = prefix + "/getAllResource";
+    $.initTreeTable("id", "pid", columns, url, false);
+}

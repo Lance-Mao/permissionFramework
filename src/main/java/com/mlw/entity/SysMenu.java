@@ -13,6 +13,8 @@ public class SysMenu {
 
     private Integer sort;
 
+    private String menuType;
+
     private Integer deep;
 
     private String code;
@@ -89,5 +91,13 @@ public class SysMenu {
 
     public void setResource(String resource) {
         this.resource = resource == null ? null : resource.trim();
+    }
+
+    public String getMenuType() {
+        return menuType;
+    }
+
+    public void setMenuType(String menuType) {
+        this.menuType = menuType;
     }
 }
