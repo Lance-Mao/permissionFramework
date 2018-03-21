@@ -8,6 +8,7 @@
         <result column="url" jdbcType="VARCHAR" property="url"/>
         <result column="icon" jdbcType="VARCHAR" property="icon"/>
         <result column="sort" jdbcType="INTEGER" property="sort"/>
+        <result column="menuType" jdbcType="INTEGER" property="menuType"/>
         <result column="deep" jdbcType="INTEGER" property="deep"/>
         <result column="code" jdbcType="VARCHAR" property="code"/>
         <result column="resource" jdbcType="VARCHAR" property="resource"/>
@@ -73,7 +74,7 @@
         </where>
     </sql>
     <sql id="Base_Column_List">
-    id, menuName, pid, url, icon, sort, deep, code, resource
+    id, menuName, pid, url, icon, sort, deep, menuType, code, resource
   </sql>
     <select id="selectByExample" parameterType="com.mlw.entity.SysMenuExample" resultMap="BaseResultMap">
         select

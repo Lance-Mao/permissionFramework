@@ -36,6 +36,8 @@ function loading() {
             align: 'center',
             valign: 'middle',
             formatter: function (item, index) {
+                alert(JSON.stringify(item));
+
                 if (item.menuType == 'M') {
                     return '<span class="label label-primary">目录</span>';
                 }

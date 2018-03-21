@@ -34,7 +34,6 @@
             var _root = options.rootCodeValue ? options.rootCodeValue : null
             var result = [];
             $.each(data, function (index, item) {
-                alert(JSON.stringify(data));
                 // 这里兼容几种常见Root节点写法
                 // 默认的几种判断
                 var _defaultRootFlag = item[options.parentCode] == '0'

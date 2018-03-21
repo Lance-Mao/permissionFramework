@@ -123,6 +123,8 @@ public class PermissionServiceImpl implements PermissionService {
 
     public List<SysMenu> getAllResource() {
 
+        List<SysMenu> sysMenus = sysMenuMapper.getAllResource();
+
         return sysMenuMapper.getAllResource();
     }
 }
