@@ -1,6 +1,5 @@
 package com.mlw.controller.sys.authorityManagement;
 
-import com.mlw.common.R;
 import com.mlw.entity.SysMenu;
 import com.mlw.service.PermissionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,13 +29,12 @@ public class ResourceManagementController {
 
     @RequestMapping("/getAllResource")
     @ResponseBody
-    public R getAllResource() {
+    public List<SysMenu> getAllResource() {
         try {
-            List<SysMenu> menus = permissionService.getAllResource();
-            return R.ok("menus", menus);
+            return permissionService.getAllResource();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return R.error();
+        return null;
     }
 }

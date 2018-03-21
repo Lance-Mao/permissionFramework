@@ -1,11 +1,10 @@
-
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title></title>
 	<meta name="keywords" content="">
 	<meta name="description" content="">
-	<link rel="shortcut icon" href="favicon.ico">
+	<link rel="shortcut icon" href="/static/default/favicon%20.ico">
 	<link href="/static/default/css/bootstrap.min.css" rel="stylesheet">
 	<link href="/static/default/css/font-awesome.css" rel="stylesheet">
 	<!-- bootstrap-table 表格插件样式 -->
