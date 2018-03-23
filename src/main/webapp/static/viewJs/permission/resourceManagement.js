@@ -36,8 +36,6 @@ function loading() {
             align: 'center',
             valign: 'middle',
             formatter: function (item, index) {
-                alert(JSON.stringify(item));
-
                 if (item.menuType == 'M') {
                     return '<span class="label label-primary">目录</span>';
                 }
@@ -63,4 +61,34 @@ function loading() {
 
     var url = prefix + "/getAllResource";
     $.initTreeTable("id", "pid", columns, url, false);
+}
+
+/*菜单管理-新增*/
+function add(id) {
+    var url = prefix + "/add/" + id;
+    layer_show("新增菜单", url, "800", "550");
+}
+
+/*菜单管理-修改*/
+function edit(menuId) {
+    var url = prefix + '/edit/' + menuId;
+    layer_show("修改菜单", url, '800', '550');
+}
+
+/*菜单管理-删除*/
+function remove(menuId) {
+    layer.confirm("确定要删除菜单吗？", {icon: 3, title: '提示'}, function (index) {
+        $.ajax({
+            type: 'get',
+            url: prefix + "/del/" + menuId,
+            success: function (r) {
+                if (r.code == 0) {
+                    layer.msg(r.msg, {icon: 1, time: 1000});
+                    loading();
+                } else {
+                    layer.alert(r.msg, {icon: 2, title: "系统提示"});
+                }
+            }
+        });
+    });
 }

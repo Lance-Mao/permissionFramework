@@ -127,4 +127,9 @@ public class PermissionServiceImpl implements PermissionService {
 
         return sysMenuMapper.getAllResource();
     }
+
+    public SysMenu selectMenuById(String id) {
+        return sysMenuMapper.selectMenuById(id);
+    }
+
 }

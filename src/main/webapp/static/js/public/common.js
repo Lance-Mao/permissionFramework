@@ -1,7 +1,8 @@
 /**
  * 通用方法封装处理
- * Copyright (c) 2018 ruoyi 
+ * Copyright (c) 2018 ruoyi
  */
+
 /*
 	参数解释：
 	title	标题
@@ -12,16 +13,20 @@
 function layer_show(title, url, w, h) {
     if (title == null || title == '') {
         title = false;
-    };
+    }
+    ;
     if (url == null || url == '') {
         url = "404.html";
-    };
+    }
+    ;
     if (w == null || w == '') {
         w = 800;
-    };
+    }
+    ;
     if (h == null || h == '') {
         h = ($(window).height() - 50);
-    };
+    }
+    ;
     layer.open({
         type: 2,
         area: [w + 'px', h + 'px'],
@@ -47,16 +52,16 @@ web_status = {
 };
 
 //对jquery的ajax方法再次封装
-_ajax = function(url, data, type, r) {
-	if (!r) {
-		return;
-	}
+_ajax = function (url, data, type, r) {
+    if (!r) {
+        return;
+    }
     var config = {
         url: url,
         type: type,
         dataType: "json",
         data: data,
-        success: function(result) {
+        success: function (result) {
             simpleSuccess(result);
         }
     };
@@ -66,18 +71,18 @@ _ajax = function(url, data, type, r) {
 /** 返回结果处理 */
 function simpleSuccess(result) {
     if (result.code == web_status.SUCCESS) {
-		$.modalMsg(result.msg, "success");
-		$.refreshTable();
+        $.modalMsg(result.msg, "success");
+        $.refreshTable();
     } else {
-    	$.modalAlert(result.msg, "error");
+        $.modalAlert(result.msg, "error");
     }
 }
 
 /** 时间格式化 */
 function formatDate(_date, _pattern) {
-	var date = new Date(_date);
-	var newDate = date.format(_pattern);
-	return newDate;
+    var date = new Date(_date);
+    var newDate = date.format(_pattern);
+    return newDate;
 }
 
 Date.prototype.format = function (format) {

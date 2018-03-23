@@ -12,6 +12,8 @@
 	<link href="/static/default/jqTreeGrid/jquery.treegrid.css" rel="stylesheet">
 	<link href="/static/default/css/animate.css" rel="stylesheet">
 	<link href="/static/default/css/style.css" rel="stylesheet">
+    <%--layui--%>
+	<link href="/static/default/layer/skin/layer.css" rel="stylesheet">
 </head>
 	<script src="/static/default/js/jquery.min.js"></script>
 	<script src="/static/default/js/bootstrap.min.js"></script>
