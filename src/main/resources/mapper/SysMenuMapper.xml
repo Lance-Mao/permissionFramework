@@ -12,6 +12,10 @@
         <result column="deep" jdbcType="INTEGER" property="deep"/>
         <result column="code" jdbcType="VARCHAR" property="code"/>
         <result column="resource" jdbcType="VARCHAR" property="resource"/>
+        <result column="visible" jdbcType="INTEGER" property="visible"/>
+        <result column="perms" jdbcType="VARCHAR" property="perms"/>
+        <result column="create_time" jdbcType="DATE" property="createTime"/>
+        <result column="update_time" jdbcType="DATE" property="updateTime"/>
     </resultMap>
     <sql id="Example_Where_Clause">
         <where>
@@ -74,7 +78,7 @@
         </where>
     </sql>
     <sql id="Base_Column_List">
-    id, menuName, pid, url, icon, sort, deep, menuType, code, resource
+    id, menuName, pid, url, icon, sort, deep, menuType, code, resource, visible, perms,create_time,update_time
   </sql>
     <select id="selectByExample" parameterType="com.mlw.entity.SysMenuExample" resultMap="BaseResultMap">
         select
@@ -109,10 +113,11 @@
     <insert id="insert" parameterType="com.mlw.entity.SysMenu">
     insert into sys_menu (id, menuName, pid, 
       url, icon, sort, deep, 
-      code, resource)
-    values (#{id,jdbcType=VARCHAR}, #{menuname,jdbcType=VARCHAR}, #{pid,jdbcType=VARCHAR}, 
+      code, resource,visible,perms,create_time,update_time,createBy,updateBy)
+    values (#{id,jdbcType=VARCHAR}, #{menuName,jdbcType=VARCHAR}, #{pid,jdbcType=VARCHAR},
       #{url,jdbcType=VARCHAR}, #{icon,jdbcType=VARCHAR}, #{sort,jdbcType=INTEGER}, #{deep,jdbcType=INTEGER}, 
-      #{code,jdbcType=VARCHAR}, #{resource,jdbcType=VARCHAR})
+      #{code,jdbcType=VARCHAR}, #{resource,jdbcType=VARCHAR},#{visible,jdbcType=INTEGER},#{perms,jdbcType=VARCHAR},now(),
+      #{updateTime,jdbcType=DATE}, #{createBy,jdbcType=VARCHAR}, #{updateBy,jdbcType=VARCHAR})
   </insert>
     <insert id="insertSelective" parameterType="com.mlw.entity.SysMenu">
         insert into sys_menu
@@ -271,6 +276,12 @@
       deep = #{deep,jdbcType=INTEGER},
       code = #{code,jdbcType=VARCHAR},
       resource = #{resource,jdbcType=VARCHAR}
+      visible = #{visible,jdbcType=INTEGER},
+      perms = #{perms,jdbcType=VARCHAR},
+      create_time = #{resource,jdbcType=DATE},
+      create_time = #{resource,jdbcType=DATE},
+      createBy = #{createBy,jdbcType=VARCHAR},
+      updateBy = #{updateBy,jdbcType=VARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>
 

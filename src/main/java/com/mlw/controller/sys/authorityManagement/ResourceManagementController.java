@@ -1,5 +1,6 @@
 package com.mlw.controller.sys.authorityManagement;
 
+import com.mlw.common.R;
 import com.mlw.entity.SysMenu;
 import com.mlw.service.PermissionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +19,7 @@ import java.util.List;
  * @create 2018-03-18 下午3:18
  */
 @Controller
-@RequestMapping("permissionOperation")
+@RequestMapping("/permissionOperation")
 public class ResourceManagementController {
 
     @Autowired
@@ -58,4 +59,14 @@ public class ResourceManagementController {
         model.addAttribute("menu", sysMenu);
         return "permissionOperation/resourceManagement_del";
     }
+
+    @RequestMapping("/save")
+    @ResponseBody
+    public R save(SysMenu sysMenu) {
+        if (permissionService.save(sysMenu) > 0) {
+            return R.ok();
+        }
+        return R.error();
+    }
+
 }

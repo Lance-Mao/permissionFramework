@@ -10,9 +10,11 @@ import com.mlw.mapper.SysMenuMapper;
 import com.mlw.mapper.SysUserMapper;
 import com.mlw.service.PermissionService;
 import com.mlw.util.LevelUtil;
+import com.mlw.util.ShiroUtils;
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.util.*;
 
@@ -100,13 +102,14 @@ public class PermissionServiceImpl implements PermissionService {
                 //将该层级菜单放到对应的父层级下
                 sysMenuDto.setSysMenuDtoList(lowerLevelMenu);
                 //进入到下一层级进行处理
-                transformDeptTree(lowerLevelMenu,menuDtoMultimap);
+                transformDeptTree(lowerLevelMenu, menuDtoMultimap);
             }
         }
     }
 
     /**
      * 抽取排序方法
+     *
      * @return
      */
     private Comparator<SysMenuDto> menuSort() {
@@ -132,4 +135,23 @@ public class PermissionServiceImpl implements PermissionService {
         return sysMenuMapper.selectMenuById(id);
     }
 
+    public int save(SysMenu sysMenu) {
+        try {
+            String id = sysMenu.getId();
+            if (StringUtils.isEmpty(id)) {
+                //获取当前系统操作者
+                //如果当前菜单id不存在，则采用插入操作
+                sysMenu.setId(UUID.randomUUID().toString().replaceAll("-", ""));
+                sysMenu.setCreateBy(ShiroUtils.getUserEntity().getName());
+                return sysMenuMapper.insert(sysMenu);
+            } else {
+                //如果菜单Id存在，则进行更新
+                sysMenu.setUpdateBy(ShiroUtils.getUserEntity().getName());
+                return sysMenuMapper.updateByPrimaryKey(sysMenu);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
 }

@@ -1,5 +1,7 @@
 package com.mlw.entity;
 
+import java.util.Date;
+
 public class SysMenu {
     private String id;
 
@@ -20,6 +22,18 @@ public class SysMenu {
     private String code;
 
     private String resource;
+
+    private String perms;
+
+    private Integer visible;
+
+    private Date createTime;
+
+    private Date updateTime;
+
+    private String updateBy;
+
+    private String createBy;
 
     public String getId() {
         return id;
@@ -99,5 +113,53 @@ public class SysMenu {
 
     public void setMenuType(String menuType) {
         this.menuType = menuType;
+    }
+
+    public String getPerms() {
+        return perms;
+    }
+
+    public void setPerms(String perms) {
+        this.perms = perms;
+    }
+
+    public Integer getVisible() {
+        return visible;
+    }
+
+    public void setVisible(Integer visible) {
+        this.visible = visible;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    public Date getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(Date updateTime) {
+        this.updateTime = updateTime;
+    }
+
+    public String getUpdateBy() {
+        return updateBy;
+    }
+
+    public void setUpdateBy(String updateBy) {
+        this.updateBy = updateBy;
+    }
+
+    public String getCreateBy() {
+        return createBy;
+    }
+
+    public void setCreateBy(String createBy) {
+        this.createBy = createBy;
     }
 }

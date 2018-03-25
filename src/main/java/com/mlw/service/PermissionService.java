@@ -18,4 +18,6 @@ public interface PermissionService {
     List<SysMenu> getAllResource();
 
     SysMenu selectMenuById(String id);
+
+    int save(SysMenu sysMenu);
 }
