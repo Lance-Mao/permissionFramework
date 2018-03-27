@@ -15,64 +15,6 @@
     <result column="logContent" jdbcType="LONGVARCHAR" property="logcontent" />
     <result column="requestParams" jdbcType="LONGVARCHAR" property="requestparams" />
   </resultMap>
-  <sql id="Example_Where_Clause">
-    <where>
-      <foreach collection="oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue">
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue">
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue">
-                  and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
-            </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Update_By_Example_Where_Clause">
-    <where>
-      <foreach collection="example" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue">
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue">
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue">
-                  and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
-            </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
   <sql id="Base_Column_List">
     id, userName, logTitle, clientIp, requestUrl, requestMethod, logTime, other
   </sql>
@@ -95,20 +37,6 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByExample" parameterType="com.mlw.entity.SysLogExample" resultMap="BaseResultMap">
-    select
-    <if test="distinct">
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    from sys_log
-    <if test="parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null">
-      order by ${orderByClause}
-    </if>
-  </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
     select 
     <include refid="Base_Column_List" />
@@ -120,12 +48,6 @@
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from sys_log
     where id = #{id,jdbcType=VARCHAR}
-  </delete>
-  <delete id="deleteByExample" parameterType="com.mlw.entity.SysLogExample">
-    delete from sys_log
-    <if test="parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
   </delete>
   <insert id="insert" parameterType="com.mlw.entity.SysLog">
     insert into sys_log (id, userName, logTitle, 
@@ -204,80 +126,6 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.mlw.entity.SysLogExample" resultType="java.lang.Long">
-    select count(*) from sys_log
-    <if test="parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-  </select>
-  <update id="updateByExampleSelective" parameterType="map">
-    update sys_log
-    <set>
-      <if test="record.id != null">
-        id = #{record.id,jdbcType=VARCHAR},
-      </if>
-      <if test="record.username != null">
-        userName = #{record.username,jdbcType=VARCHAR},
-      </if>
-      <if test="record.logtitle != null">
-        logTitle = #{record.logtitle,jdbcType=VARCHAR},
-      </if>
-      <if test="record.clientip != null">
-        clientIp = #{record.clientip,jdbcType=VARCHAR},
-      </if>
-      <if test="record.requesturl != null">
-        requestUrl = #{record.requesturl,jdbcType=VARCHAR},
-      </if>
-      <if test="record.requestmethod != null">
-        requestMethod = #{record.requestmethod,jdbcType=VARCHAR},
-      </if>
-      <if test="record.logtime != null">
-        logTime = #{record.logtime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="record.other != null">
-        other = #{record.other,jdbcType=VARCHAR},
-      </if>
-      <if test="record.logcontent != null">
-        logContent = #{record.logcontent,jdbcType=LONGVARCHAR},
-      </if>
-      <if test="record.requestparams != null">
-        requestParams = #{record.requestparams,jdbcType=LONGVARCHAR},
-      </if>
-    </set>
-    <if test="parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExampleWithBLOBs" parameterType="map">
-    update sys_log
-    set id = #{record.id,jdbcType=VARCHAR},
-      userName = #{record.username,jdbcType=VARCHAR},
-      logTitle = #{record.logtitle,jdbcType=VARCHAR},
-      clientIp = #{record.clientip,jdbcType=VARCHAR},
-      requestUrl = #{record.requesturl,jdbcType=VARCHAR},
-      requestMethod = #{record.requestmethod,jdbcType=VARCHAR},
-      logTime = #{record.logtime,jdbcType=TIMESTAMP},
-      other = #{record.other,jdbcType=VARCHAR},
-      logContent = #{record.logcontent,jdbcType=LONGVARCHAR},
-      requestParams = #{record.requestparams,jdbcType=LONGVARCHAR}
-    <if test="parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExample" parameterType="map">
-    update sys_log
-    set id = #{record.id,jdbcType=VARCHAR},
-      userName = #{record.username,jdbcType=VARCHAR},
-      logTitle = #{record.logtitle,jdbcType=VARCHAR},
-      clientIp = #{record.clientip,jdbcType=VARCHAR},
-      requestUrl = #{record.requesturl,jdbcType=VARCHAR},
-      requestMethod = #{record.requestmethod,jdbcType=VARCHAR},
-      logTime = #{record.logtime,jdbcType=TIMESTAMP},
-      other = #{record.other,jdbcType=VARCHAR}
-    <if test="parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
   <update id="updateByPrimaryKeySelective" parameterType="com.mlw.entity.SysLog">
     update sys_log
     <set>

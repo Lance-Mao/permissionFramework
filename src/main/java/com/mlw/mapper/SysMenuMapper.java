@@ -1,17 +1,13 @@
 package com.mlw.mapper;
 
 import com.mlw.entity.SysMenu;
-import com.mlw.entity.SysMenuExample;
+
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 import org.apache.ibatis.annotations.Param;
 
 public interface SysMenuMapper {
-    long countByExample(SysMenuExample example);
-
-    int deleteByExample(SysMenuExample example);
 
     int deleteByPrimaryKey(String id);
 
@@ -19,13 +15,7 @@ public interface SysMenuMapper {
 
     int insertSelective(SysMenu record);
 
-    List<SysMenu> selectByExample(SysMenuExample example);
-
     SysMenu selectByPrimaryKey(String id);
-
-    int updateByExampleSelective(@Param("record") SysMenu record, @Param("example") SysMenuExample example);
-
-    int updateByExample(@Param("record") SysMenu record, @Param("example") SysMenuExample example);
 
     int updateByPrimaryKeySelective(SysMenu record);
 

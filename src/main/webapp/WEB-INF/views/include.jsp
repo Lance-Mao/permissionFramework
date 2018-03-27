@@ -15,9 +15,10 @@
     <%--layui--%>
 	<link href="${baseurl}/static/default/layer/skin/layer.css" rel="stylesheet">
 </head>
+<div>
 	<script src="${baseurl}/static/default/js/jquery.min.js"></script>
 	<script src="${baseurl}/static/default/js/bootstrap.min.js"></script>
-	
+
 	<!-- bootstrap-table 表格插件 -->
 	<script src="${baseurl}/static/default/bootstrap-table/bootstrap-table.min.js"></script>
 	<script src="${baseurl}/static/default/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>

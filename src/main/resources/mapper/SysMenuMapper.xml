@@ -104,12 +104,6 @@
     delete from sys_menu
     where id = #{id,jdbcType=VARCHAR}
   </delete>
-    <delete id="deleteByExample" parameterType="com.mlw.entity.SysMenuExample">
-        delete from sys_menu
-        <if test="_parameter != null">
-            <include refid="Example_Where_Clause"/>
-        </if>
-    </delete>
     <insert id="insert" parameterType="com.mlw.entity.SysMenu">
     insert into sys_menu (id, menuName, pid, 
       url, icon, sort, deep, menuType,
@@ -180,62 +174,6 @@
             </if>
         </trim>
     </insert>
-    <select id="countByExample" parameterType="com.mlw.entity.SysMenuExample" resultType="java.lang.Long">
-        select count(*) from sys_menu
-        <if test="_parameter != null">
-            <include refid="Example_Where_Clause"/>
-        </if>
-    </select>
-    <update id="updateByExampleSelective" parameterType="map">
-        update sys_menu
-        <set>
-            <if test="record.id != null">
-                id = #{record.id,jdbcType=VARCHAR},
-            </if>
-            <if test="record.menuname != null">
-                menuName = #{record.menuname,jdbcType=VARCHAR},
-            </if>
-            <if test="record.pid != null">
-                pid = #{record.pid,jdbcType=VARCHAR},
-            </if>
-            <if test="record.url != null">
-                url = #{record.url,jdbcType=VARCHAR},
-            </if>
-            <if test="record.icon != null">
-                icon = #{record.icon,jdbcType=VARCHAR},
-            </if>
-            <if test="record.sort != null">
-                sort = #{record.sort,jdbcType=INTEGER},
-            </if>
-            <if test="record.deep != null">
-                deep = #{record.deep,jdbcType=INTEGER},
-            </if>
-            <if test="record.code != null">
-                code = #{record.code,jdbcType=VARCHAR},
-            </if>
-            <if test="record.resource != null">
-                resource = #{record.resource,jdbcType=VARCHAR},
-            </if>
-        </set>
-        <if test="_parameter != null">
-            <include refid="Update_By_Example_Where_Clause"/>
-        </if>
-    </update>
-    <update id="updateByExample" parameterType="map">
-        update sys_menu
-        set id = #{record.id,jdbcType=VARCHAR},
-        menuName = #{record.menuname,jdbcType=VARCHAR},
-        pid = #{record.pid,jdbcType=VARCHAR},
-        url = #{record.url,jdbcType=VARCHAR},
-        icon = #{record.icon,jdbcType=VARCHAR},
-        sort = #{record.sort,jdbcType=INTEGER},
-        deep = #{record.deep,jdbcType=INTEGER},
-        code = #{record.code,jdbcType=VARCHAR},
-        resource = #{record.resource,jdbcType=VARCHAR}
-        <if test="_parameter != null">
-            <include refid="Update_By_Example_Where_Clause"/>
-        </if>
-    </update>
     <update id="updateByPrimaryKeySelective" parameterType="com.mlw.entity.SysMenu">
         update sys_menu
         <set>

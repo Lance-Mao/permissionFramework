@@ -3,7 +3,7 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>layui后台管理模板 2.0</title>
+	<title>权限系统开发初期版本</title>
 	<meta name="renderer" content="webkit">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<meta http-equiv="Access-Control-Allow-Origin" content="*">
@@ -30,13 +30,6 @@
 				<!-- 顶级菜单 -->
 				<ul class="layui-nav mobileTopLevelMenus" mobile>
 					<li class="layui-nav-item" data-menu="contentManagement">
-						<%--<a href="javascript:;"><i class="seraph icon-caidan"></i><cite>layuiCMS</cite></a>--%>
-						<%--<dl class="layui-nav-child">--%>
-							<%--<dd class="layui-this" data-menu="contentManagement"><a href="javascript:;"><i class="layui-icon" data-icon="&#xe63c;">&#xe63c;</i><cite>内容管理</cite></a></dd>--%>
-							<%--<dd data-menu="memberCenter"><a href="javascript:;"><i class="seraph icon-icon10" data-icon="icon-icon10"></i><cite>用户中心</cite></a></dd>--%>
-							<%--<dd data-menu="systemeSttings"><a href="javascript:;"><i class="layui-icon" data-icon="&#xe620;">&#xe620;</i><cite>系统设置</cite></a></dd>--%>
-							<%--<dd data-menu="seraphApi"><a href="javascript:;"><i class="layui-icon" data-icon="&#xe705;">&#xe705;</i><cite>使用文档</cite></a></dd>--%>
-						<%--</dl>--%>
 					</li>
 				</ul>
 				<ul class="layui-nav topLevelMenus" pc>
@@ -79,7 +72,7 @@
 		<div class="layui-side layui-bg-black">
 			<div class="user-photo">
 				<a class="img" title="我的头像" ><img src="${baseurl}/static/images/face.jpg" class="userAvatar"></a>
-				<p>你好！<span class="userName">驊驊龔頾</span>, 欢迎登录</p>
+				<p>你好！<span class="userName">admin</span>, 欢迎登录</p>
 			</div>
 			<!-- 搜索 -->
 			<div class="layui-form component">

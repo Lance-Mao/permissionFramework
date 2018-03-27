@@ -1,14 +1,11 @@
 package com.mlw.mapper;
 
 import com.mlw.entity.SysRoleMenu;
-import com.mlw.entity.SysRoleMenuExample;
+
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface SysRoleMenuMapper {
-    long countByExample(SysRoleMenuExample example);
-
-    int deleteByExample(SysRoleMenuExample example);
 
     int deleteByPrimaryKey(String id);
 
@@ -16,13 +13,7 @@ public interface SysRoleMenuMapper {
 
     int insertSelective(SysRoleMenu record);
 
-    List<SysRoleMenu> selectByExample(SysRoleMenuExample example);
-
     SysRoleMenu selectByPrimaryKey(String id);
-
-    int updateByExampleSelective(@Param("record") SysRoleMenu record, @Param("example") SysRoleMenuExample example);
-
-    int updateByExample(@Param("record") SysRoleMenu record, @Param("example") SysRoleMenuExample example);
 
     int updateByPrimaryKeySelective(SysRoleMenu record);
 

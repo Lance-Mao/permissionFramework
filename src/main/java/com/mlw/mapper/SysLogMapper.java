@@ -1,14 +1,11 @@
 package com.mlw.mapper;
 
 import com.mlw.entity.SysLog;
-import com.mlw.entity.SysLogExample;
+
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface SysLogMapper {
-    long countByExample(SysLogExample example);
-
-    int deleteByExample(SysLogExample example);
 
     int deleteByPrimaryKey(String id);
 
@@ -16,17 +13,7 @@ public interface SysLogMapper {
 
     int insertSelective(SysLog record);
 
-    List<SysLog> selectByExampleWithBLOBs(SysLogExample example);
-
-    List<SysLog> selectByExample(SysLogExample example);
-
     SysLog selectByPrimaryKey(String id);
-
-    int updateByExampleSelective(@Param("record") SysLog record, @Param("example") SysLogExample example);
-
-    int updateByExampleWithBLOBs(@Param("record") SysLog record, @Param("example") SysLogExample example);
-
-    int updateByExample(@Param("record") SysLog record, @Param("example") SysLogExample example);
 
     int updateByPrimaryKeySelective(SysLog record);
 

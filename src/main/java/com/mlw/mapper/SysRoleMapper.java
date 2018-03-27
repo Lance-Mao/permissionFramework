@@ -1,16 +1,13 @@
 package com.mlw.mapper;
 
 import com.mlw.entity.SysRole;
-import com.mlw.entity.SysRoleExample;
+
 import java.util.List;
 import java.util.Set;
 
 import org.apache.ibatis.annotations.Param;
 
 public interface SysRoleMapper {
-    long countByExample(SysRoleExample example);
-
-    int deleteByExample(SysRoleExample example);
 
     int deleteByPrimaryKey(String id);
 
@@ -18,13 +15,7 @@ public interface SysRoleMapper {
 
     int insertSelective(SysRole record);
 
-    List<SysRole> selectByExample(SysRoleExample example);
-
     SysRole selectByPrimaryKey(String id);
-
-    int updateByExampleSelective(@Param("record") SysRole record, @Param("example") SysRoleExample example);
-
-    int updateByExample(@Param("record") SysRole record, @Param("example") SysRoleExample example);
 
     int updateByPrimaryKeySelective(SysRole record);
 
