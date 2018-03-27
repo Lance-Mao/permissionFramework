@@ -20,4 +20,6 @@ public interface PermissionService {
     SysMenu selectMenuById(String id);
 
     int save(SysMenu sysMenu);
+
+    int deleteMenuById(String menuId);
 }

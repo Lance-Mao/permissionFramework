@@ -154,4 +154,8 @@ public class PermissionServiceImpl implements PermissionService {
             return 0;
         }
     }
+
+    public int deleteMenuById(String menuId) {
+        return sysMenuMapper.deleteByPrimaryKey(menuId);
+    }
 }

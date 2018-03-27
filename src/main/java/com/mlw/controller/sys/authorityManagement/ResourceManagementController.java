@@ -56,10 +56,12 @@ public class ResourceManagementController {
     }
 
     @RequestMapping("/del/{menuId}")
-    public String del(@PathVariable("menuId") String menuId, Model model) {
-        SysMenu sysMenu = permissionService.selectMenuById(menuId);
-        model.addAttribute("menu", sysMenu);
-        return "permissionOperation/resourceManagement_del";
+    @ResponseBody
+    public R del(@PathVariable("menuId") String menuId, Model model) {
+        if (permissionService.deleteMenuById(menuId) > 0) {
+            return R.ok("删除成功");
+        }
+        return R.error("删除失败");
     }
 
     @RequestMapping("/save")
@@ -70,6 +72,7 @@ public class ResourceManagementController {
         }
         return R.error();
     }
+
 
     @RequestMapping("/icon")
     public String icon() {
