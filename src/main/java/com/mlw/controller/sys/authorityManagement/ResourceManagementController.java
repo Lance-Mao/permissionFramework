@@ -47,12 +47,14 @@ public class ResourceManagementController {
         model.addAttribute("menu", sysMenu);
         return "permissionOperation/resourceManagement_add";
     }
+
     @RequestMapping("/edit/{menuId}")
     public String edit(@PathVariable("menuId") String menuId, Model model) {
         SysMenu sysMenu = permissionService.selectMenuById(menuId);
         model.addAttribute("menu", sysMenu);
         return "permissionOperation/resourceManagement_edit";
     }
+
     @RequestMapping("/del/{menuId}")
     public String del(@PathVariable("menuId") String menuId, Model model) {
         SysMenu sysMenu = permissionService.selectMenuById(menuId);
@@ -69,4 +71,8 @@ public class ResourceManagementController {
         return R.error();
     }
 
+    @RequestMapping("/icon")
+    public String icon() {
+        return "/permissionOperation/icon";
+    }
 }

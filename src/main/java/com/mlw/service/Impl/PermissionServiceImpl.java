@@ -147,7 +147,7 @@ public class PermissionServiceImpl implements PermissionService {
             } else {
                 //如果菜单Id存在，则进行更新
                 sysMenu.setUpdateBy(ShiroUtils.getUserEntity().getName());
-                return sysMenuMapper.updateByPrimaryKey(sysMenu);
+                return sysMenuMapper.updateByPrimaryKeySelective(sysMenu);
             }
         } catch (Exception e) {
             e.printStackTrace();

@@ -11,8 +11,8 @@
 <head>
     <title>Title</title>
     <%@include file="../include.jsp" %>
-    <script src="/${baseurl}static/default/iCheck/icheck.min.js"></script>
-    <link href=${baseurl}"/static/default/iCheck/custom.css" rel="stylesheet">
+    <script src="${baseurl}/static/default/iCheck/icheck.min.js" type="text/javascript"></script>
+    <link href="${baseurl}/static/default/iCheck/custom.css" rel="stylesheet">
 </head>
 <body class="white-bg">
 <div class="wrapper wrapper-content animated fadeInRight ibox-content">
@@ -21,7 +21,9 @@
         <div class="form-group">
             <label class="col-sm-3 control-label ">上级菜单：</label>
             <div class="col-sm-8">
-                <input class="form-control" type="text" readonly="true" value="${menu.menuName}"/>
+                <label>
+                    <input class="form-control" type="text" readonly="true" value="${menu.menuName}"/>
+                </label>
             </div>
         </div>
         <div class="form-group">
@@ -35,25 +37,27 @@
         <div class="form-group">
             <label class="col-sm-3 control-label">菜单名称：</label>
             <div class="col-sm-8">
-                <input class="form-control" type="text" name="menuName" id="menuName">
+                <label for="menuName"></label><input class="form-control" type="text" name="menuName" id="menuName">
             </div>
         </div>
         <div class="form-group">
             <label class="col-sm-3 control-label">请求地址：</label>
             <div class="col-sm-8">
-                <input id="url" name="url" class="form-control" type="text">
+                <label for="url"></label><input id="url" name="url" class="form-control" type="text">
             </div>
         </div>
         <div class="form-group">
             <label class="col-sm-3 control-label">权限标识：</label>
             <div class="col-sm-8">
-                <input id="perms" name="perms" class="form-control" type="text">
+                <label for="perms"></label><input id="perms" name="perms" class="form-control" type="text">
             </div>
         </div>
         <div class="form-group">
             <label class="col-sm-3 control-label">显示排序：</label>
             <div class="col-sm-8">
-                <input class="form-control" type="text" name="sort">
+                <label>
+                    <input class="form-control" type="text" name="sort">
+                </label>
             </div>
         </div>
         <div class="form-group">
@@ -61,7 +65,7 @@
             <div class="col-sm-5">
                 <input id="icon" name="icon" class="form-control" type="text" placeholder="例如：fa fa-index">
             </div>
-            <input class="btn btn-warning" type="button" value="选择图标" onclick="openIocn()">
+            <input class="btn btn-warning" type="button" value="选择图标" onclick="openIocn()" />
         </div>
         <div class="form-group">
             <label class="col-sm-3 control-label">菜单状态：</label>
@@ -83,7 +87,7 @@
         </div>
     </form>
 </div>
-<script type="text/javascript" src="${baseurl}/static/viewJs/permission/resourceManagement_add.js" />
+<script type="text/javascript" src="${baseurl}/static/viewJs/permission/resourceManagement_add.js" ></script>
 
 <script>
     $(document).ready(function(){$(".i-checks").iCheck({checkboxClass:"icheckbox_square-green",radioClass:"iradio_square-green",})});

@@ -112,10 +112,10 @@
     </delete>
     <insert id="insert" parameterType="com.mlw.entity.SysMenu">
     insert into sys_menu (id, menuName, pid, 
-      url, icon, sort, deep, 
+      url, icon, sort, deep, menuType,
       code, resource,visible,perms,create_time,update_time,createBy,updateBy)
     values (#{id,jdbcType=VARCHAR}, #{menuName,jdbcType=VARCHAR}, #{pid,jdbcType=VARCHAR},
-      #{url,jdbcType=VARCHAR}, #{icon,jdbcType=VARCHAR}, #{sort,jdbcType=INTEGER}, #{deep,jdbcType=INTEGER}, 
+      #{url,jdbcType=VARCHAR}, #{icon,jdbcType=VARCHAR}, #{sort,jdbcType=INTEGER}, #{deep,jdbcType=INTEGER}, #{menuType,jdbcType=VARCHAR},
       #{code,jdbcType=VARCHAR}, #{resource,jdbcType=VARCHAR},#{visible,jdbcType=INTEGER},#{perms,jdbcType=VARCHAR},now(),
       #{updateTime,jdbcType=DATE}, #{createBy,jdbcType=VARCHAR}, #{updateBy,jdbcType=VARCHAR})
   </insert>
@@ -239,8 +239,8 @@
     <update id="updateByPrimaryKeySelective" parameterType="com.mlw.entity.SysMenu">
         update sys_menu
         <set>
-            <if test="menuname != null">
-                menuName = #{menuname,jdbcType=VARCHAR},
+            <if test="menuName != null">
+                menuName = #{menuName,jdbcType=VARCHAR},
             </if>
             <if test="pid != null">
                 pid = #{pid,jdbcType=VARCHAR},
@@ -262,6 +262,24 @@
             </if>
             <if test="resource != null">
                 resource = #{resource,jdbcType=VARCHAR},
+            </if>
+            <if test="menuType != null">
+                menuType = #{menuType,jdbcType=INTEGER},
+            </if>
+            <if test="visible != null">
+                visible = #{visible,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=DATE},
+            </if>
+            <if test="updateTime != null">
+                update_time = now(),
+            </if>
+            <if test="updateBy != null">
+                updateBy = #{updateBy,jdbcType=VARCHAR},
+            </if>
+            <if test="createBy != null">
+                createBy = #{createBy,jdbcType=VARCHAR},
             </if>
         </set>
         where id = #{id,jdbcType=VARCHAR}

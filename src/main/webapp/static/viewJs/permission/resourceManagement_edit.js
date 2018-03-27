@@ -3,18 +3,18 @@ $("#form-menu-add").validate({
         menuName: {
             required: true
         },
-        url:{
-            required:true
+        url: {
+            required: true
         },
-        perms:{
-            required:true
+        perms: {
+            required: true
         },
-        sort:{
-            required:true,
+        sort: {
+            required: true,
         },
     },
-    submitHandler:function(form){
-        add();
+    submitHandler: function (form) {
+        edit();
     }
 });
 
@@ -24,7 +24,8 @@ function openIocn() {
 }
 
 
-function add() {
+function edit() {
+    var id = $("input[name='id']").val();
     var parentId = $("input[name='parentId']").val();
     var menuType = $('input[name="menuType"]:checked').val();
     var menuName = $("input[name='menuName']").val();
@@ -38,6 +39,7 @@ function add() {
         url: baseUrl + "/permissionOperation/save",
         type: "POST",
         data: {
+            "id": id,
             "pid": parentId,
             "menuType": menuType,
             "menuName": menuName,
@@ -53,7 +55,7 @@ function add() {
         },
         success: function (data) {
             if (data.code == 0) {
-                parent.layer.msg('新增成功',{icon:1,time:1000});
+                parent.layer.msg('更新成功', {icon: 1, time: 1000});
                 $.modalClose();
                 parent.loading();
             } else {
